@@ -1,0 +1,108 @@
+/**
+ * Phase 4 derived-intelligence contract.
+ *
+ * Phase 4A rule: derived intelligence is a *view* over the verified Phase 3
+ * financial data. It never becomes a second source of financial truth, and no
+ * derived claim ships without evidence that names the data that produced it.
+ *
+ * This module is types only — it holds no logic, imports no storage/network/AI,
+ * and is safe to import from anywhere (including pure builder modules).
+ */
+
+/* ------------------------------------------------------------------ *
+ * Evidence primitives
+ * ------------------------------------------------------------------ */
+
+/**
+ * Collections a Phase 4 claim may cite. Names match the persisted Supabase
+ * tables so a source pointer is directly traceable to a real row.
+ */
+export type SourceCollection =
+  | 'profile'
+  | 'accounts'
+  | 'categories'
+  | 'transactions'
+  | 'recurring_transactions'
+  | 'budgets'
+  | 'goals'
+  | 'snapshots';
+
+/** A pointer to one persisted row that contributed to a derived claim. */
+export interface SourceRef {
+  collection: SourceCollection;
+  id: string;
+}
+
+/**
+ * The structured answer to "what financial data produced this?".
+ *
+ * `metrics` holds the exact numbers used, `thresholds` the exact bands applied,
+ * and `sourceRefs` the supporting rows — so a stored claim is always
+ * reproducible from the same persisted data plus the rule version.
+ */
+export interface Evidence {
+  /** Stable rule identifier, e.g. `twin.behaviour`. */
+  ruleId: string;
+  /** Bumped whenever the rule body or a threshold changes. */
+  ruleVersion: string;
+  /** Window the claim applies to: `YYYY-MM`, or `all` for full history. */
+  periodKey: string;
+  metrics: Record<string, number>;
+  thresholds: Record<string, number>;
+  sourceRefs: SourceRef[];
+  computedAt: string;
+}
+
+/** Why a section could not be derived from the user's real data. */
+export type InsufficientDataCode =
+  | 'no_accounts'
+  | 'no_transactions'
+  | 'no_income'
+  | 'no_expenses'
+  | 'no_categories'
+  | 'no_budgets'
+  | 'no_goals'
+  | 'no_recurring_transactions'
+  | 'no_activity'
+  | 'mixed_currency';
+
+/**
+ * One explicit reason a section shows nothing.
+ *
+ * `missing` names the collections that would make the section derivable, which
+ * is what lets the UI explain *why* nothing is shown instead of showing a zero
+ * that looks like a real financial figure.
+ */
+export interface InsufficientDataReason {
+  code: InsufficientDataCode;
+  message: string;
+  missing: SourceCollection[];
+}
+
+/* ------------------------------------------------------------------ *
+ * Section contract
+ * ------------------------------------------------------------------ */
+
+/** A section backed by real data, carrying the evidence that proves it. */
+export interface AvailableSection<T> {
+  status: 'available';
+  data: T;
+  evidence: Evidence;
+  notes: string[];
+}
+
+/** A section that is honestly empty, carrying the reason why. */
+export interface InsufficientDataSection {
+  status: 'insufficient_data';
+  data: null;
+  evidence: null;
+  reasons: InsufficientDataReason[];
+}
+
+/**
+ * Every Phase 4 branch is either `available` or `insufficient_data`.
+ *
+ * There is deliberately no third state: a section may never present a
+ * placeholder that looks like a real financial value.
+ */
+export type IntelligenceSection<T> = AvailableSection<T> | InsufficientDataSection;

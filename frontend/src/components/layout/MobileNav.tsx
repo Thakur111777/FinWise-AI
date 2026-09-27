@@ -1,0 +1,80 @@
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { BarChart3, BrainCircuit, CircleDollarSign, Fingerprint, Landmark, Menu, PiggyBank, Settings, Sparkles, Wallet2, WalletCards, X } from 'lucide-react';
+import { appRoutes } from '../../config/routes';
+
+const icons: Record<string, typeof CircleDollarSign> = {
+  overview: CircleDollarSign,
+  accounts: WalletCards,
+  transactions: Wallet2,
+  budget: Landmark,
+  goals: PiggyBank,
+  analytics: BarChart3,
+  'digital-twin': Fingerprint,
+  'future-lab': Sparkles,
+  'ai-assistant': BrainCircuit,
+  settings: Settings,
+};
+
+export function MobileNav() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <header className="border-b border-slate-200 bg-white/90 px-4 py-3 backdrop-blur md:hidden">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-teal-700 text-sm font-bold text-white">
+            F
+          </div>
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">FINWISE</p>
+            <p className="text-sm font-semibold text-slate-900">AI</p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIsOpen((open) => !open)}
+          aria-expanded={isOpen}
+          aria-controls="mobile-nav-menu"
+          className="rounded-lg border border-slate-200 p-2 text-slate-600 hover:border-slate-300 hover:text-slate-900"
+          aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        >
+          {isOpen ? (
+            <X className="h-5 w-5" aria-hidden="true" />
+          ) : (
+            <Menu className="h-5 w-5" aria-hidden="true" />
+          )}
+        </button>
+      </div>
+
+      {isOpen && (
+        <nav
+          id="mobile-nav-menu"
+          className="mt-3 grid grid-cols-2 gap-2"
+          aria-label="Mobile navigation"
+        >
+          {appRoutes.map((route) => {
+            const Icon = icons[route.key] ?? CircleDollarSign;
+
+            return (
+              <NavLink
+                key={route.path}
+                to={route.path}
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `flex items-center gap-2 rounded-lg px-3 py-2 text-sm ${
+                    isActive ? 'bg-teal-50 text-teal-800' : 'bg-slate-50 text-slate-700'
+                  }`
+                }
+              >
+                <Icon className="h-4 w-4" aria-hidden="true" />
+                <span>{route.label}</span>
+              </NavLink>
+            );
+          })}
+        </nav>
+      )}
+    </header>
+  );
+}

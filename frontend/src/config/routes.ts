@@ -1,0 +1,18 @@
+export const appRoutes = [
+  { key: 'overview', label: 'Overview', path: '/overview' },
+  { key: 'accounts', label: 'Accounts', path: '/accounts' },
+  { key: 'transactions', label: 'Transactions', path: '/transactions' },
+  { key: 'budget', label: 'Budget', path: '/budget' },
+  { key: 'goals', label: 'Goals', path: '/goals' },
+  { key: 'analytics', label: 'Analytics', path: '/analytics' },
+  { key: 'digital-twin', label: 'Digital Twin', path: '/digital-twin' },
+  { key: 'future-lab', label: 'Future Lab', path: '/future-lab' },
+  { key: 'ai-assistant', label: 'BumShankar AI 🔱🕉️', path: '/ai-assistant' },
+  { key: 'settings', label: 'Settings', path: '/settings' },
+] as const;
+
+export const authRoutes = {
+  landing: '/',
+  login: '/login',
+  signup: '/signup',
+};

@@ -1,0 +1,119 @@
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { BarChart3, BrainCircuit, CircleDollarSign, Fingerprint, Landmark, LogOut, PiggyBank, Settings, Sparkles, TrendingUp, Wallet2, WalletCards } from 'lucide-react';
+import { appRoutes } from '../../config/routes';
+import { useAuth } from '../../features/auth/useAuth';
+import { useDashboardMetrics } from '../../features/dashboard/useDashboardMetrics';
+import { useFinancialData } from '../../features/dashboard/useFinancialData';
+import { defaultCurrency } from '../../features/financial/selectors';
+import { formatCurrency } from '../../lib/currency';
+
+const icons: Record<string, typeof CircleDollarSign> = {
+  overview: CircleDollarSign,
+  accounts: WalletCards,
+  transactions: Wallet2,
+  budget: Landmark,
+  goals: PiggyBank,
+  analytics: BarChart3,
+  'digital-twin': Fingerprint,
+  'future-lab': Sparkles,
+  'ai-assistant': BrainCircuit,
+  settings: Settings,
+};
+
+export function Sidebar() {
+  const financial = useFinancialData();
+  const metrics = useDashboardMetrics();
+  const { user, signOut } = useAuth();
+  const safeToSpend = metrics.safeToSpend?.safeToSpend ?? null;
+  const [signingOut, setSigningOut] = useState(false);
+  const [signOutError, setSignOutError] = useState<string | null>(null);
+
+  const handleSignOut = async () => {
+    if (signingOut) return;
+    setSigningOut(true);
+    setSignOutError(null);
+    try {
+      await signOut();
+    } catch (signOutFailure) {
+      // A failed sign-out must never become an unhandled rejection: the
+      // session is still active, so say so instead of pretending it worked.
+      setSignOutError(
+        signOutFailure instanceof Error ? signOutFailure.message : 'Could not sign out. Please try again.',
+      );
+    } finally {
+      setSigningOut(false);
+    }
+  };
+
+  return (
+    <aside className="hidden w-72 shrink-0 border-r border-slate-200 bg-white/80 p-5 backdrop-blur md:flex md:flex-col">
+      <div className="mb-8 flex items-center gap-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-700 text-sm font-bold text-white shadow-soft">
+          F
+        </div>
+        <div>
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">FINWISE</p>
+          <p className="text-base font-semibold text-slate-900">AI</p>
+        </div>
+      </div>
+
+      <nav aria-label="Primary navigation" className="space-y-1.5">
+        {appRoutes.map((route) => {
+          const Icon = icons[route.key] ?? TrendingUp;
+
+          return (
+            <NavLink
+              key={route.path}
+              to={route.path}
+              className={({ isActive }) =>
+                `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition ${
+                  isActive
+                    ? 'bg-teal-50 text-teal-800 ring-1 ring-teal-100'
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                }`
+              }
+            >
+              <Icon className="h-4 w-4" aria-hidden="true" />
+              <span>{route.label}</span>
+            </NavLink>
+          );
+        })}
+      </nav>
+
+      <div className="mt-auto rounded-2xl border border-teal-100 bg-gradient-to-br from-teal-50 to-white p-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">Safe to Spend</p>
+        <p className="mt-2 text-2xl font-semibold text-slate-900">
+          {safeToSpend === null ? '—' : formatCurrency(safeToSpend, defaultCurrency(financial), financial.profile?.locale)}
+        </p>
+        <p className="mt-2 text-sm text-slate-600">
+          {safeToSpend === null
+            ? 'Calculated from your data once accounts are connected in a later phase.'
+            : 'Income minus committed costs, savings, and your emergency buffer.'}
+        </p>
+      </div>
+
+      {user !== null && (
+        <div className="mt-4 border-t border-slate-200 pt-4">
+          <p className="truncate text-xs font-medium text-slate-500" title={user.email ?? undefined}>
+            {user.displayName ?? user.email ?? 'Signed in'}
+          </p>
+          <button
+            type="button"
+            onClick={handleSignOut}
+            disabled={signingOut}
+            className="mt-2 flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <LogOut className="h-4 w-4" aria-hidden="true" />
+            {signingOut ? 'Signing out…' : 'Sign out'}
+          </button>
+          {signOutError !== null && (
+            <p role="alert" className="mt-2 text-xs font-medium text-rose-700">
+              {signOutError}
+            </p>
+          )}
+        </div>
+      )}
+    </aside>
+  );
+}
