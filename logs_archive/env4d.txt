@@ -1,0 +1,16 @@
+﻿node: v24.17.0
+vite present: True
+esbuild nested in vite: False
+typescript present: True
+--- root md/txt with 4d/arch/alert in name ---
+4d2-eslint.txt
+4d2-final-tsc.txt
+4d2-final-verify.txt
+4d2-tsc.txt
+4d2-verify-final.txt
+4d2-verify.txt
+PHASE_4A_ARCHITECTURE.md
+PROJECT_ARCHITECTURE.md
+verify_phase4d.mjs
+--- content search: 4d.1 / smart-alerts in root docs ---
+none

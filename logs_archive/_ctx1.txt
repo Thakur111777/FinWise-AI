@@ -1,0 +1,7 @@
+harness_lines=91
+git_dir=False
+node_modules=True
+esbuild_root=False
+esbuild_vite=False
+engine=False
+alerts_dir=False

@@ -1,0 +1,77 @@
+﻿    () => createFinancialIntelligenceRepository(user === null ? null : { id: user.id }),
+    [user],
+  );
+
+  // -- Derivation (once per financial state change) ---------------------------
+  const twin = useMemo(
+    () =>
+      buildFinancialTwin({
+        now: new Date(),
+        profile: data.profile,
+        accounts: data.accounts,
+        categories: data.categories,
+        transactions: data.transactions,
+        budgets: data.budgets,
+        goals: data.goals,
+        recurringTransactions: data.recurringTransactions,
+        metrics,
+      }),
+    [data, metrics],
+  );
+
+  const draft = useMemo(
+    () =>
+      data.isHydrated && !signedOutConfigured
+        ? buildSnapshotDraft({ metrics, currencyCode: data.profile?.primaryCurrency ?? null })
+        : null,
+    [data.isHydrated, data.profile, metrics, signedOutConfigured],
+  );
+
+  // -- Snapshot memory (read) --------------------------------------------------
+  const [snapshots, setSnapshots] = useState<FinancialSnapshot[]>([]);
+  const [snapshotsLoading, setSnapshotsLoading] = useState(true);
+  const [snapshotError, setSnapshotError] = useState<string | null>(null);
+  const loadSequence = useRef(0);
+
+  /**
+   * True when the store may read the repository: hydrated, and never behind an
+   * authenticated user's back (the configured-but-signed-out case holds an
+   * honest empty state instead of local data).
+   */
+  const readEnabled = data.isHydrated && !signedOutConfigured;
+
+  const refreshSnapshots = useCallback(async (): Promise<void> => {
+    // Re-read the snapshot history after a capture (never called synchronously
+    // from an effect body â€” the hydration effect below commits state in promise
+    // callbacks instead). It yields before touching any state and stamps the
+    // load sequence after the yield: two refreshes started in the same tick
+    // still stamp in call order, so the latest load always wins.
+    await Promise.resolve();
+    const sequence = ++loadSequence.current;
+    try {
+      // `snapshotsLoading` starts true from useState, covering the first load;
+      // it is cleared only when this load is still the latest one.
+      const loaded = await repository.loadSnapshots(SNAPSHOT_HISTORY_LIMIT);
+      if (sequence !== loadSequence.current) return;
+      setSnapshots(loaded);
+      setSnapshotError(null);
+      setSnapshotsLoading(false);
+    } catch (error) {
+      if (sequence !== loadSequence.current) return;
+      setSnapshotError(error instanceof Error ? error.message : 'Could not load your Digital Twin history.');
+      setSnapshotsLoading(false);
+    }
+  }, [repository]);
+
+  /**
+   * Hydrate the bounded snapshot history â€” the same repository-then-commit
+   * shape as the financial data hydration in financialDataContext.tsx: the
+   * read starts in the effect, but every setState runs inside the promise
+   * callbacks, never synchronously in the effect body
+   * (react-hooks/set-state-in-effect). Superseded loads are discarded via the
+   * sequence stamp, so the latest read always wins.
+   */
+  useEffect(() => {
+    if (!readEnabled) return;
+    const sequence = ++loadSequence.current;
+

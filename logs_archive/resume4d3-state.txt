@@ -1,0 +1,4 @@
+﻿=== 1. engine + alerts dir ===
+=== 2. 4d3 files ===
+=== 3. any smartAlertPersistence / mapper files ===
+=== 4. root txt files (newest 15) ===

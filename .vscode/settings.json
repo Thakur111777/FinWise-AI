@@ -1,0 +1,9 @@
+{
+  // Deno language server is scoped to the Supabase Edge Functions ONLY.
+  // The React/Vite frontend keeps the standard TypeScript server, so Deno
+  // globals (Deno.env, ...) and jsr:/https: import specifiers never leak
+  // into src/**. See supabase/functions/deno.json for the function import map.
+  "deno.enable": false,
+  "deno.enablePaths": ["supabase/functions"],
+  "deno.config": "supabase/functions/deno.json"
+}

@@ -1,0 +1,237 @@
+{
+  "ok": false,
+  "passCount": 17,
+  "total": 43,
+  "results": [
+    {
+      "name": "T1 local-mode dev server on :5199 (this is the app under test)",
+      "pass": true,
+      "detail": "started by harness"
+    },
+    {
+      "name": "T1 headless Edge launched with CDP",
+      "pass": true,
+      "detail": "Edg/153.0.4234.48"
+    },
+    {
+      "name": "T1 app loads; local fallback mode active (no redirect to /login; Supabase env blanked)",
+      "pass": true,
+      "detail": "pathname=/overview"
+    },
+    {
+      "name": "T6 overview renders seeded data (Total balance 2,49,500 = balances re-derived from initial balance + transactions)",
+      "pass": false,
+      "detail": "value=null"
+    },
+    {
+      "name": "T6 /accounts renders via Sidebar with correct data",
+      "pass": false,
+      "detail": "pathname=/overview"
+    },
+    {
+      "name": "T6 /transactions renders via Sidebar with correct data",
+      "pass": false,
+      "detail": "pathname=/overview"
+    },
+    {
+      "name": "T6 /budget renders via Sidebar with correct data",
+      "pass": false,
+      "detail": "pathname=/overview"
+    },
+    {
+      "name": "T6 /goals renders via Sidebar with correct data",
+      "pass": false,
+      "detail": "pathname=/overview"
+    },
+    {
+      "name": "T6 /analytics renders via Sidebar with correct data",
+      "pass": false,
+      "detail": "pathname=/overview"
+    },
+    {
+      "name": "T2 /digital-twin reachable via Sidebar navigation",
+      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T3 twin: State / Behaviour / Health / Relationships sections render",
+      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T3 twin: stat cards render",
+      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T3 twin net worth = 2,49,500 (re-derived from accounts + transactions, not hardcoded)",
+      "pass": false,
+      "detail": "value=null"
+    },
+    {
+      "name": "T3 behaviour derives groceries total 16,500 from transactions (12,000+4,500)",
+      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T3 relationships link real rows (account/category/budget/goal/recurring)",
+      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T4 every available section carries an Evidence line with rule version",
+      "pass": false,
+      "detail": "evidence lines=0"
+    },
+    {
+      "name": "T4 evidence cites real source counts (accounts/transactions...)",
+      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T3 twin memory: first snapshot auto-captured (guarded write)",
+      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T3 snapshot storage row count = 1",
+      "pass": false,
+      "detail": "count=0"
+    },
+    {
+      "name": "T5 tour: twin wrote only its snapshot key; rendering never rewrites financial data",
+      "pass": true,
+      "detail": "newKeys=[] changedCore=[]"
+    },
+    {
+      "name": "T5 refresh keeps /digital-twin working from persisted data",
+      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T5 after refresh: still exactly 1 snapshot (same day, no material change => no duplicate capture)",
+      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T5 after refresh: snapshot row count unchanged (no duplicates)",
+      "pass": false,
+      "detail": "count=0"
+    },
+    {
+      "name": "T5 after refresh: transactions/accounts/budgets/goals byte-identical (no duplicates)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "T8 deterministic: reload re-derives an identical twin (rendered values contain no randomness/time drift)",
+      "pass": true,
+      "detail": "twin text identical across reload (0 chars)"
+    },
+    {
+      "name": "T7 desktop (1440px): no horizontal overflow",
+      "pass": true,
+      "detail": "{\"sw\":1440,\"cw\":1440}"
+    },
+    {
+      "name": "T4 empty data: insufficient-data reasons shown with named missing collections",
+      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T4 empty data: net worth renders the em-dash placeholder (no fabricated 0 / currency value)",
+      "pass": false,
+      "detail": "label-value=null"
+    },
+    {
+      "name": "T4 empty data: 0 snapshots (no capture without real data)",
+      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T7 mobile (390px): overview loads",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "T2 MobileNav reaches /digital-twin",
+      "pass": false,
+      "detail": "missing-link"
+    },
+    {
+      "name": "T7 mobile twin renders all sections",
+      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T7 mobile (390px): no horizontal overflow / unusable sections",
+      "pass": true,
+      "detail": "{\"sw\":390,\"cw\":390}"
+    },
+    {
+      "name": "T8 Phase 4B source set scanned (no Phase 3/Copilot file touched)",
+      "pass": true,
+      "detail": "13 files: evidence.ts, finance.ts, section.ts, twin.ts, financialIntelligenceContext.tsx, financialIntelligenceContextCore.ts, useFinancialIntelligence.ts, intelligence.ts, DigitalTwinPage.tsx, intelligenceRepository.ts, intelligenceRepositoryFactory.ts, localStorageIntelligenceRepository.ts, supabaseIntelligenceRepository.ts"
+    },
+    {
+      "name": "T8 no service-role key / secret env var / API key / JWT literal in Phase 4B source",
+      "pass": true,
+      "detail": "none (anon key only, via the shared Supabase client)"
+    },
+    {
+      "name": "T8 no hardcoded user id (UUID literal) in Phase 4B source",
+      "pass": true,
+      "detail": "none (identity comes from the verified session only)"
+    },
+    {
+      "name": "T8 no privileged/DB bypass: no core-table access, no admin client, no auth bypass in Phase 4B",
+      "pass": true,
+      "detail": "none (snapshots/insights only, RLS + session-scoped)"
+    },
+    {
+      "name": "T8 twin path uses no AI/API/network call at all (no Gemini, no edge function, no fetch)",
+      "pass": true,
+      "detail": "none"
+    },
+    {
+      "name": "T8 pure derivation modules (src/intelligence) import no service/Supabase layer",
+      "pass": true,
+      "detail": "evidence.ts, finance.ts, section.ts, twin.ts, intelligence.ts"
+    },
+    {
+      "name": "T8 runtime: zero off-origin requests in the whole session (no Supabase/Gemini traffic from the twin)",
+      "pass": true,
+      "detail": "454 requests, all same-origin (127.0.0.1:5199, incl. Vite HMR)"
+    },
+    {
+      "name": "no console errors/warnings during the whole session",
+      "pass": false,
+      "detail": "[console.warning] %s\n\n%s\n An error occurred in the <FinancialIntelligenceStore> component. Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries. | [console.warning] %s\n\n%s\n An error occurred in the <FinancialIntelligenceStore> component. Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries. | [console.warning] %s\n\n%s\n An error occurred in the <FinancialIntelligenceStore> component. Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries. | [console.warning] %s\n\n%s\n An error occurred in the <FinancialIntelligenceStore> component. Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries. | [console.warning] %s\n\n%s\n An error occurred in the <FinancialIntelligenceStore> component. Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries."
+    },
+    {
+      "name": "no uncaught page exceptions during the whole session",
+      "pass": false,
+      "detail": "Uncaught ReferenceError: Cannot access 'guardedCapture' before initialization\n    at FinancialIntelligenceStore (http://127.0.0.1:5199/src/features/intelligence/financialIntelligenceContext.tsx:222:3)\n    at Object.react_stack_bottom_frame (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:14142:12)\n    at renderWithHooks (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:4400:19)\n    at updateFunctionComponent (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:5775:16)\n    at beginWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:6391:20)\n    at runWithFiberInDEV (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:944:66)\n    at performUnitOfWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9148:92)\n    at workLoopSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9044:37)\n    at renderRootSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9028:6)\n    at performWorkOnRoot (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:8715:27) | Uncaught ReferenceError: Cannot access 'guardedCapture' before initialization\n    at FinancialIntelligenceStore (http://127.0.0.1:5199/src/features/intelligence/financialIntelligenceContext.tsx:222:3)\n    at Object.react_stack_bottom_frame (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:14142:12)\n    at renderWithHooks (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:4400:19)\n    at updateFunctionComponent (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:5775:16)\n    at beginWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:6391:20)\n    at runWithFiberInDEV (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:944:66)\n    at performUnitOfWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9148:92)\n    at workLoopSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9044:37)\n    at renderRootSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9028:6)\n    at performWorkOnRoot (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:8715:27) | Uncaught ReferenceError: Cannot access 'guardedCapture' before initialization\n    at FinancialIntelligenceStore (http://127.0.0.1:5199/src/features/intelligence/financialIntelligenceContext.tsx:222:3)\n    at Object.react_stack_bottom_frame (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:14142:12)\n    at renderWithHooks (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:4400:19)\n    at updateFunctionComponent (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:5775:16)\n    at beginWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:6391:20)\n    at runWithFiberInDEV (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:944:66)\n    at performUnitOfWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9148:92)\n    at workLoopSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9044:37)\n    at renderRootSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9028:6)\n    at performWorkOnRoot (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:8715:27) | Uncaught ReferenceError: Cannot access 'guardedCapture' before initialization\n    at FinancialIntelligenceStore (http://127.0.0.1:5199/src/features/intelligence/financialIntelligenceContext.tsx:222:3)\n    at Object.react_stack_bottom_frame (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:14142:12)\n    at renderWithHooks (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:4400:19)\n    at updateFunctionComponent (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:5775:16)\n    at beginWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:6391:20)\n    at runWithFiberInDEV (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:944:66)\n    at performUnitOfWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9148:92)\n    at workLoopSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9044:37)\n    at renderRootSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9028:6)\n    at performWorkOnRoot (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:8715:27) | Uncaught ReferenceError: Cannot access 'guardedCapture' before initialization\n    at FinancialIntelligenceStore (http://127.0.0.1:5199/src/features/intelligence/financialIntelligenceContext.tsx:222:3)\n    at Object.react_stack_bottom_frame (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:14142:12)\n    at renderWithHooks (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:4400:19)\n    at updateFunctionComponent (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:5775:16)\n    at beginWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:6391:20)\n    at runWithFiberInDEV (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:944:66)\n    at performUnitOfWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9148:92)\n    at workLoopSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9044:37)\n    at renderRootSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9028:6)\n    at performWorkOnRoot (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:8715:27)"
+    },
+    {
+      "name": "no failed network requests during the whole session",
+      "pass": true,
+      "detail": "none"
+    }
+  ],
+  "consoleErrors": [
+    "[console.warning] %s\n\n%s\n An error occurred in the <FinancialIntelligenceStore> component. Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries.",
+    "[console.warning] %s\n\n%s\n An error occurred in the <FinancialIntelligenceStore> component. Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries.",
+    "[console.warning] %s\n\n%s\n An error occurred in the <FinancialIntelligenceStore> component. Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries.",
+    "[console.warning] %s\n\n%s\n An error occurred in the <FinancialIntelligenceStore> component. Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries.",
+    "[console.warning] %s\n\n%s\n An error occurred in the <FinancialIntelligenceStore> component. Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries."
+  ],
+  "pageErrors": [
+    "Uncaught ReferenceError: Cannot access 'guardedCapture' before initialization\n    at FinancialIntelligenceStore (http://127.0.0.1:5199/src/features/intelligence/financialIntelligenceContext.tsx:222:3)\n    at Object.react_stack_bottom_frame (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:14142:12)\n    at renderWithHooks (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:4400:19)\n    at updateFunctionComponent (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:5775:16)\n    at beginWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:6391:20)\n    at runWithFiberInDEV (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:944:66)\n    at performUnitOfWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9148:92)\n    at workLoopSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9044:37)\n    at renderRootSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9028:6)\n    at performWorkOnRoot (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:8715:27)",
+    "Uncaught ReferenceError: Cannot access 'guardedCapture' before initialization\n    at FinancialIntelligenceStore (http://127.0.0.1:5199/src/features/intelligence/financialIntelligenceContext.tsx:222:3)\n    at Object.react_stack_bottom_frame (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:14142:12)\n    at renderWithHooks (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:4400:19)\n    at updateFunctionComponent (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:5775:16)\n    at beginWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:6391:20)\n    at runWithFiberInDEV (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:944:66)\n    at performUnitOfWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9148:92)\n    at workLoopSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9044:37)\n    at renderRootSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9028:6)\n    at performWorkOnRoot (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:8715:27)",
+    "Uncaught ReferenceError: Cannot access 'guardedCapture' before initialization\n    at FinancialIntelligenceStore (http://127.0.0.1:5199/src/features/intelligence/financialIntelligenceContext.tsx:222:3)\n    at Object.react_stack_bottom_frame (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:14142:12)\n    at renderWithHooks (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:4400:19)\n    at updateFunctionComponent (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:5775:16)\n    at beginWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:6391:20)\n    at runWithFiberInDEV (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:944:66)\n    at performUnitOfWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9148:92)\n    at workLoopSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9044:37)\n    at renderRootSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9028:6)\n    at performWorkOnRoot (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:8715:27)",
+    "Uncaught ReferenceError: Cannot access 'guardedCapture' before initialization\n    at FinancialIntelligenceStore (http://127.0.0.1:5199/src/features/intelligence/financialIntelligenceContext.tsx:222:3)\n    at Object.react_stack_bottom_frame (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:14142:12)\n    at renderWithHooks (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:4400:19)\n    at updateFunctionComponent (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:5775:16)\n    at beginWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:6391:20)\n    at runWithFiberInDEV (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:944:66)\n    at performUnitOfWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9148:92)\n    at workLoopSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9044:37)\n    at renderRootSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9028:6)\n    at performWorkOnRoot (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:8715:27)",
+    "Uncaught ReferenceError: Cannot access 'guardedCapture' before initialization\n    at FinancialIntelligenceStore (http://127.0.0.1:5199/src/features/intelligence/financialIntelligenceContext.tsx:222:3)\n    at Object.react_stack_bottom_frame (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:14142:12)\n    at renderWithHooks (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:4400:19)\n    at updateFunctionComponent (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:5775:16)\n    at beginWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:6391:20)\n    at runWithFiberInDEV (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:944:66)\n    at performUnitOfWork (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9148:92)\n    at workLoopSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9044:37)\n    at renderRootSync (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:9028:6)\n    at performWorkOnRoot (http://127.0.0.1:5199/node_modules/.vite/deps/react-dom_client.js?v=65ff33cb:8715:27)"
+  ],
+  "failedRequests": []
+}

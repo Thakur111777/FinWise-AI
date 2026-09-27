@@ -1,0 +1,11 @@
+﻿  // ---- T5: refresh persistence / no duplication ------------------------------
+  const coreBefore = await evalJs(cdp, `JSON.stringify(${JSON.stringify(CORE_KEYS)}.map((k) => localStorage.getItem(k)))`);
+  await cdp.send('Page.reload'); await sleep(1700);
+  record('T5 refresh keeps /digital-twin working from persisted data', (await pagePath(cdp)) === '/digital-twin');
+  const twinText2 = await innerText(cdp); dumps.twinAfterRefresh = twinText2.slice(0, 2500);
+  record('T5 after refresh: still exactly 1 snapshot (same day, no material change => no duplicate capture)', /1 snapshot captured/.test(twinText2));
+  const snapCount2 = await evalJs(cdp, `JSON.parse(localStorage.getItem('finwise.intelligence.snapshots.v1') || '[]').length`);
+  record('T5 after refresh: snapshot row count unchanged (no duplicates)', snapCount2 === 1, 'count=' + snapCount2);
+  const coreAfter = await evalJs(cdp, `JSON.stringify(${JSON.stringify(CORE_KEYS)}.map((k) => localStorage.getItem(k)))`);
+  record('T5 after refresh: transactions/accounts/budgets/goals byte-identical (no duplicates)', coreBefore === coreAfter);
+  {

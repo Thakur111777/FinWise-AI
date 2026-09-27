@@ -1,0 +1,4 @@
+﻿engine exists: False
+harness lines: 91
+node: v24.17.0
+esbuild root: False

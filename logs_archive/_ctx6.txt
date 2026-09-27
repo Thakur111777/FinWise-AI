@@ -1,0 +1,15 @@
+--- tsconfig/eslint files ---
+eslint-accounts-fix.txt  len=2
+eslint-exit.txt  len=15
+eslint-fresh.txt  len=25
+eslint-out.txt  len=25
+eslint.config.js  len=744
+eslint4c5b.txt  len=15
+tsconfig.app.json  len=655
+tsconfig.json  len=119
+tsconfig.node.json  len=575
+--- pkg hashes (before) ---
+package.json=58CD6AFCA389D6E64CA0ED811193A9E096B17F5EC82679034F6C1E1B35C24102
+package-lock.json=C6A8415E074FF62E742ACA46A7035A5EEE487E22E329BF2C50682DB2A4F3B0C9
+--- root md/txt containing 4D-3 ---
+none

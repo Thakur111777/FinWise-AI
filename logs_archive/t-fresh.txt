@@ -1,0 +1,5 @@
+tsc exit=0
+STDOUT:
+
+STDERR:
+

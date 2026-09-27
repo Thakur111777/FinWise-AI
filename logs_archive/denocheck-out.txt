@@ -1,0 +1,15 @@
+=== npx deno --version ===
+exit=0
+deno 2.9.6 (stable, release, x86_64-pc-windows-msvc)
+v8 15.0.245.2-rusty
+typescript 6.0.3
+
+
+=== deno check index.ts (config: supabase/functions/deno.json) ===
+exit=0
+
+
+=== deno check scope.ts ===
+exit=0
+
+

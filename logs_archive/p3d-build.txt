@@ -1,0 +1,25 @@
+
+> finwise-ai@0.0.0 build
+> tsc -b && vite build
+
+[36mvite v8.3.0 [32mbuilding client environment for production...[36m[39m
+transforming...
+✓ 1749 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:   0.29 kB
+dist/assets/index-Do28kOaK.css   20.12 kB │ gzip:   4.95 kB
+dist/assets/index-DisNZA6c.js   652.64 kB │ gzip: 181.87 kB
+
+[32m✓ built in 3.65s[39m
+[33m[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[33m[33m[PLUGIN_TIMINGS] [0mPlugin hooks ran for 1.7s of this 3.6s build (48%).
+The slowest hooks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - vite:css transform (35%, 1.3s, 1 call)
+Additional hook time came from hooks under 1s.
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+[39m

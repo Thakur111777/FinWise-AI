@@ -1,0 +1,56 @@
+﻿
+Name                    Length LastWriteTime      
+----                    ------ -------------      
+p4b-ctx-slice.txt         3227 21-09-2026 15:26:29
+p4b-ctx-slice2.txt        2603 21-09-2026 15:26:45
+p4b-dev-err.txt              0 21-09-2026 15:16:47
+p4b-dev-out.txt            159 21-09-2026 15:32:43
+p4b-dev.pid                  7 21-09-2026 15:16:47
+p4b-dump-a.txt            1755 21-09-2026 15:34:36
+p4b-dump-b.txt             405 21-09-2026 15:34:36
+p4b-dump-c.txt             643 21-09-2026 15:34:54
+p4b-dump-d.txt             623 21-09-2026 15:35:13
+p4b-dump-twin.txt         3317 21-09-2026 15:25:45
+p4b-files.txt                5 21-09-2026 15:49:35
+p4b-intel-contract.txt    3508 21-09-2026 00:54:19
+p4b-lint.txt                 0 21-09-2026 15:45:50
+p4b-manual-err.log           0 21-09-2026 15:32:42
+p4b-manual-report.txt    11131 21-09-2026 15:33:04
+p4b-manual-results.json   7572 21-09-2026 15:33:04
+p4b-manual-run.log        4425 21-09-2026 15:33:04
+p4b-manual-test.cjs      32141 21-09-2026 15:44:53
+p4b-manual.pid               7 21-09-2026 15:32:42
+p4b-mobilenav.txt         2779 21-09-2026 00:54:19
+p4b-page.txt                 0 21-09-2026 00:54:19
+p4b-poll.txt              3312 21-09-2026 15:25:15
+p4b-provider.txt             0 21-09-2026 00:54:19
+p4b-report-tail.txt        563 21-09-2026 15:38:49
+p4b-results-slice.txt     1590 21-09-2026 15:39:05
+p4b-routes.txt             743 21-09-2026 00:54:19
+p4b-run-err.txt              0 21-09-2026 15:30:03
+p4b-run-out.txt            611 21-09-2026 15:30:12
+p4b-run-stderr.txt           0 21-09-2026 15:23:15
+p4b-run-stdout.txt        2980 21-09-2026 15:23:35
+p4b-run.pid                  7 21-09-2026 15:30:03
+p4b-sidebar.txt           4906 21-09-2026 00:54:19
+p4b-srvcheck.cjs           525 21-09-2026 15:19:42
+p4b-srvcheck.txt            17 21-09-2026 15:19:54
+p4b-syntax.txt              48 21-09-2026 15:45:17
+p4b-twin-desktop.png    137199 21-09-2026 15:32:57
+p4b-twin-mobile.png     163284 21-09-2026 15:33:02
+p4b-twin.txt                 0 21-09-2026 00:54:19
+p4b-verify3a.txt          3682 21-09-2026 14:55:25
+p4b-verify3b.txt          5730 21-09-2026 14:55:26
+p4b-verify3d.txt         16406 21-09-2026 14:55:26
+lint-out.txt                 0 21-09-2026 15:45:46
+build-out.txt              927 21-09-2026 14:55:25
+assets                         21-09-2026 14:55:25
+favicon.svg               9522 12-09-2026 00:34:37
+icons.svg                 5031 12-09-2026 00:34:37
+index.html                 460 21-09-2026 14:55:25
+
+
+
+21 September 2026 15:49:35
+
+

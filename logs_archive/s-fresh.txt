@@ -1,0 +1,20 @@
+run-scan exit=0
+scan done
+
+--- scan-out.txt ---
+secret scan 2026-09-18T12:22:20.098Z
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\client.ts:25: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:21: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:27: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:42: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:43: matched SERVICE_ROLE_IN_SRC? (doc/template mention, no value)
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:44: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:86: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:93: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\supabaseRepository.ts:46: matched SERVICE_ROLE_IN_SRC? (doc/template mention, no value)
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\vite-env.d.ts:9: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\supabase\functions\finwise-copilot\function.mjs:18: matched AI_PROVIDER_API_KEY_VALUE?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\supabase\functions\finwise-copilot\index.ts:19: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\supabase\functions\finwise-copilot\index.ts:33: matched AI_PROVIDER_API_KEY_VALUE?
+.env.local key names only: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY
+.env.local: no server-secret key names present (good)

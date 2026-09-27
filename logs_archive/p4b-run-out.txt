@@ -1,0 +1,7 @@
+PASS  T1 local-mode dev server on :5199 (this is the app under test) — started by harness
+PASS  T1 headless Edge launched with CDP — Edg/153.0.4234.48
+PASS  T1 app loads; local fallback mode active (no redirect to /login; Supabase env blanked) — pathname=/overview
+FAIL  T6 overview renders seeded data (net worth 2,70,500 derived from accounts) — value=null
+PASS  T6 /accounts renders via Sidebar with correct data — pathname=/accounts
+PASS  T6 /transactions renders via Sidebar with correct data — pathname=/transactions
+PASS  T6 /budget renders via Sidebar with correct data — pathname=/budget

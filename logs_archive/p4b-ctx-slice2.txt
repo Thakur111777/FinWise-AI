@@ -1,0 +1,63 @@
+﻿  const visibleSnapshots = readEnabled ? snapshots : EMPTY_SNAPSHOTS;
+  const visibleSnapshotsLoading = readEnabled ? snapshotsLoading : !data.isHydrated;
+
+  // -- Snapshot capture (guarded write) ----------------------------------------
+  const [capturing, setCapturing] = useState(false);
+  const [captureError, setCaptureError] = useState<string | null>(null);
+  const lastCaptureAttempt = useRef<string | null>(null);
+
+  const runCapture = useCallback(async (): Promise<void> => {
+    if (draft === null) return;
+    // Yield once so a predicate-triggered capture never sets state
+    // synchronously inside an effect body (react-hooks/set-state-in-effect).
+    // Re-entry stays impossible: the effect guards on `capturing`, the manual
+    // button is disabled while capturing, and the signature ref dedupes.
+    await Promise.resolve();
+    setCapturing(true);
+    setCaptureError(null);
+    try {
+      await repository.saveSnapshot(draft);
+      await refreshSnapshots();
+    } catch (error) {
+      setCaptureError(error instanceof Error ? error.message : 'Could not save a Digital Twin snapshot.');
+    } finally {
+      setCapturing(false);
+    }
+  }, [draft, repository, refreshSnapshots]);
+
+  const captureSnapshot = useCallback(async (): Promise<void> => {
+    await runCapture();
+  }, [runCapture]);
+
+  useEffect(() => {
+    if (!readEnabled || draft === null || capturing) return;
+    const latest = snapshots[0] ?? null;
+    const reason = snapshotCaptureReason({
+      todayKey: toISODate(new Date()),
+      latestSnapshot: latest,
+      draft,
+    });
+    if (reason === 'none') return;
+    // One attempt per (reason, latest snapshot, draft) signature so a failing
+    // read-back can never turn the guarded capture into a retry loop.
+    const signature = `${reason}:${latest?.id ?? 'none'}:${draftFingerprint(draft)}`;
+    if (lastCaptureAttempt.current === signature) return;
+    lastCaptureAttempt.current = signature;
+    void runCapture();
+  }, [readEnabled, draft, capturing, snapshots, runCapture]);
+
+  const value = useMemo<FinancialIntelligenceContextValue>(
+    () => ({
+      twin,
+      snapshots: visibleSnapshots,
+      snapshotsLoading: visibleSnapshotsLoading,
+      snapshotError,
+      capturing,
+      captureError,
+      actions: { captureSnapshot },
+    }),
+    [twin, visibleSnapshots, visibleSnapshotsLoading, snapshotError, capturing, captureError, captureSnapshot],
+  );
+
+  return <FinancialIntelligenceContext.Provider value={value}>{children}</FinancialIntelligenceContext.Provider>;
+}

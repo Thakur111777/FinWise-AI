@@ -1,0 +1,29 @@
+exit=0
+ory boundary
+  ok    supabase.from() appears only inside src/services/supabase
+[6] Auth centralisation
+  ok    supabase.auth is called only inside the auth layer / supabase services
+[7] Security scan
+  ok    no privileged key/credential references in frontend source (config.ts guard allowed)
+  ok    config boundary refuses a service_role key instead of shipping it
+  ok    .env.example declares exactly the two client-safe variables
+  ok    .env.local contains no privileged variable names
+  ok    .env.local VITE_ variables are only the two client-safe ones
+  ok    .gitignore ignores .env files while keeping the names-only template
+[8] Accounts surface
+  ok    navigation configuration exposes Accounts at /accounts
+  ok    /accounts route renders AccountsPage inside the protected app shell
+  ok    Accounts has an icon in the desktop sidebar and the mobile navigation
+  ok    Accounts UI creates/edits accounts only through provider actions
+  ok    Accounts UI never touches localStorage or Supabase directly
+[9] Account UX consolidation
+  ok    Dashboard account card links to the canonical /accounts route
+  ok    Transactions empty state links to the canonical /accounts route
+  ok    Dashboard keeps the read-only Account balances summary card
+  ok    AccountsPage.tsx is the only page that mutates accounts (no duplicate management UI)
+  ok    the account form exists only in AccountsPage.tsx
+  ok    sidebar and mobile navigation share the single routes configuration
+
+ALL CHECKS PASSED
+
+

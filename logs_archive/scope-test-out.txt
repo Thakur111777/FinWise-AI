@@ -1,0 +1,32 @@
+PASS | 1 direct-data | in="What is my current total balance?" | expected=in_scope actual=in_scope
+PASS | 1 direct-data | in="Give me a brief summary of my current financial situation based on my data." | expected=in_scope actual=in_scope
+PASS | 2 spending | in="Where am I spending the most this month?" | expected=in_scope actual=in_scope
+PASS | 2 spending | in="How much did I spend on food recently?" | expected=in_scope actual=in_scope
+PASS | 3 budgeting | in="How are my budgets doing?" | expected=in_scope actual=in_scope
+PASS | 4 savings | in="How much should I keep in an emergency fund?" | expected=in_scope actual=in_scope
+PASS | 5 planning | in="Help me plan my finances for the next year." | expected=in_scope actual=in_scope
+PASS | 6 affordability | in="Can I afford a new laptop?" | expected=in_scope actual=in_scope
+PASS | 7 travel | in="can i go to japan with this budget" | expected=in_scope actual=in_scope
+PASS | 7 travel | in="Can I travel to Japan with my current savings?" | expected=in_scope actual=in_scope
+PASS | 8 purchase | in="How does buying this laptop affect my budget?" | expected=in_scope actual=in_scope
+PASS | 9 what-if | in="What if I lose my job next month?" | expected=in_scope actual=in_scope
+PASS | 10 education | in="How does compound interest work?" | expected=in_scope actual=in_scope
+PASS | 11 tax-insurance-debt | in="Should I invest in mutual funds or pay off my loan first?" | expected=in_scope actual=in_scope
+PASS | 11 tax-insurance-debt | in="Will my credit score improve if I close my credit card?" | expected=in_scope actual=in_scope
+PASS | 11 tax-insurance-debt | in="How much tax will I owe this year?" | expected=in_scope actual=in_scope
+PASS | 12 general-knowledge | in="What is the Prime Minister of India?" | expected=out_of_scope actual=out_of_scope
+PASS | 12 general-knowledge | in="Tell me about Japan." | expected=out_of_scope actual=out_of_scope
+PASS | 13 coding | in="Write Java code." | expected=out_of_scope actual=out_of_scope
+PASS | 13 coding | in="How do I debug a Python algorithm?" | expected=out_of_scope actual=out_of_scope
+PASS | 14 entertainment | in="Tell me about the cricket match last night." | expected=out_of_scope actual=out_of_scope
+PASS | 14 entertainment | in="Suggest a good movie to watch." | expected=out_of_scope actual=out_of_scope
+PASS | 15 science | in="Explain photosynthesis." | expected=out_of_scope actual=out_of_scope
+PASS | 15 science | in="What's the weather forecast tomorrow?" | expected=out_of_scope actual=out_of_scope
+PASS | A no-keyword-financial | in="Can I go to Japan with what I have?" | expected=in_scope actual=in_scope
+PASS | B subject-vs-intent | in="How much would a Japan trip affect my savings?" | expected=in_scope actual=in_scope
+PASS | ambiguous fail-open | in="best laptop for students" | expected=in_scope actual=in_scope
+PASS | ambiguous fail-open | in="Is a laptop a good investment?" | expected=in_scope actual=in_scope
+PASS | personal informational | in="Tell me about my spending habits." | expected=in_scope actual=in_scope
+PASS | cross-term safety | in="How do movie credits affect a film budget?" | expected=in_scope actual=in_scope
+TOTAL=30 FAILURES=0
+SCOPE CLASSIFIER: ALL CHECKS PASSED

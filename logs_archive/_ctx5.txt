@@ -1,0 +1,20 @@
+## esbuild paths
+node_modules\esbuild=False
+node_modules\vite\node_modules\esbuild=False
+lock_has_esbuild=False
+vite=8.3.0
+  dep lightningcss@^1.33.0
+  dep picomatch@^4.0.7
+  dep postcss@^8.5.28
+  dep rolldown@~1.2.6
+  dep tinyglobby@^0.2.17
+## npm cache esbuild
+C:\Users\Prashant Chadha\AppData\Local\npm-cache\_cacache\index-v5\02\f5\edc1bbb9c74c3776beb4a96bd21991b46bb40507edd7be8d7c966577dcb5
+C:\Users\Prashant Chadha\AppData\Local\npm-cache\_cacache\index-v5\0c\1e\a5d64f78dab70fc5126321fc020afa025727825de15a8ab182dbf59fea0f
+C:\Users\Prashant Chadha\AppData\Local\npm-cache\_cacache\index-v5\0d\52\6b8ad44ca9bb6c975c8622b00d4efaa28c4737e42debb1d3197be9a82fe7
+## IDE history
+C:\Users\Prashant Chadha\AppData\Roaming\Code\User\History: no hits
+C:\Users\Prashant Chadha\AppData\Roaming\Code - Insiders\User\History: absent
+C:\Users\Prashant Chadha\AppData\Roaming\VSCodium\User\History: absent
+## net 443 registry
+tcp443=True

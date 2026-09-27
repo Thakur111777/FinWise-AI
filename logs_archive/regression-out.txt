@@ -1,0 +1,111 @@
+final regression 2026-09-18T04:12:18.071Z
+--- npm run build exit=null ---
+
+
+--- npm run lint exit=null ---
+
+
+--- verify_phase3a exit=0 ---
+
+[1] Migration tables parsed: 13
+  ok    tables: profiles, accounts, categories, transactions, recurring_transactions, budgets, goals, financial_snapshots, financial_insights, life_events, scenarios, decisions, financial_memories
+
+[2] Migration columns vs database.types.ts Row interfaces
+  ok    profiles <-> ProfileRow (11 columns identical)
+  ok    accounts <-> AccountRow (11 columns identical)
+  ok    categories <-> CategoryRow (7 columns identical)
+  ok    transactions <-> TransactionRow (16 columns identical)
+  ok    recurring_transactions <-> RecurringTransactionRow (17 columns identical)
+  ok    budgets <-> BudgetRow (10 columns identical)
+  ok    goals <-> GoalRow (10 columns identical)
+  ok    financial_snapshots <-> FinancialSnapshotRow (12 columns identical)
+  ok    financial_insights <-> FinancialInsightRow (9 columns identical)
+  ok    life_events <-> LifeEventRow (8 columns identical)
+  ok    scenarios <-> ScenarioRow (8 columns identical)
+  ok    decisions <-> DecisionRow (7 columns identical)
+  ok    financial_memories <-> FinancialMemoryRow (7 columns identical)
+
+[3] supabaseRepository.ts COLUMNS selects vs Row interfaces
+  ok    COLUMNS.profile selects every ProfileRow column
+  ok    COLUMNS.accounts selects every AccountRow column
+  ok    COLUMNS.categories selects every CategoryRow column
+  ok    COLUMNS.transactions selects every TransactionRow column
+  ok    COLUMNS.recurringTransactions selects every RecurringTransactionRow column
+  ok    COLUMNS.budgets selects every BudgetRow column
+  ok    COLUMNS.goals selects every GoalRow column
+
+[4] Migration default-category seed vs src/config/categories.ts
+  ok    income defaults identical (6): Salary, Freelance, Business, Investment, Gift, Other
+  ok    expense defaults identical (12)
+
+ALL CHECKS PASSED
+
+
+--- verify_phase3b exit=0 ---
+stores the session and subscribes to auth state changes
+  ok    supabase client persists sessions (refresh restores the session)
+[2] Route protection
+  ok    AppShell route wrapped in RequireAuth in App.tsx
+  ok    guard waits for session initialisation before redirecting
+  ok    guard keeps Phase 2 local mode working when Supabase is unconfigured
+[3] Authentication UI
+  ok    sign-in wired through the auth provider
+  ok    sign-up wired through the auth provider
+  ok    email-confirmation outcome handled honestly
+  ok    AuthPage never touches supabase.auth directly (centralised)
+  ok    sign-out available in the sidebar and settings
+[4] Repository selection
+  ok    SupabaseRepository factory used by the provider
+  ok    LocalStorageRepository kept as the unconfigured fallback
+  ok    store remounts per persistence identity (sign-in/out/user switch)
+  ok    mutations re-hydrate from the repository (id adoption)
+  ok    signed-out configured app holds an honest empty state
+[5] Repository boundary
+  ok    supabase.from() appears only inside src/services/supabase
+[6] Auth centralisation
+  ok    supabase.auth is called only inside the auth layer / supabase services
+[7] Security scan
+  ok    no privileged key/credential references in frontend source (config.ts guard allowed)
+  ok    config boundary refuses a service_role key instead of shipping it
+  ok    .env.example declares exactly the two client-safe variables
+  ok    .env.local contains no privileged variable names
+  ok    .env.local VITE_ variables are only the two client-safe ones
+  ok    .gitignore ignores .env files while keeping the names-only template
+[8] Accounts surface
+  ok    navigation configuration exposes Accounts at /accounts
+  ok    /accounts route renders AccountsPage inside the protected app shell
+  ok    Accounts has an icon in the desktop sidebar and the mobile navigation
+  ok    Accounts UI creates/edits accounts only through provider actions
+  ok    Accounts UI never touches localStorage or Supabase directly
+[9] Account UX consolidation
+  ok    Dashboard account card links to the canonical /accounts route
+  ok    Transactions empty state links to the canonical /accounts route
+  ok    Dashboard keeps the read-only Account balances summary card
+  ok    AccountsPage.tsx is the only page that mutates accounts (no duplicate management UI)
+  ok    the account form exists only in AccountsPage.tsx
+  ok    sidebar and mobile navigation share the single routes configuration
+
+ALL CHECKS PASSED
+
+
+--- run-scan exit=0 ---
+scan done
+
+
+--- scan-out.txt ---
+secret scan 2026-09-18T04:12:18.432Z
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\client.ts:25: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:21: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:27: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:42: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:43: matched SERVICE_ROLE_IN_SRC? (doc/template mention, no value)
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:44: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:86: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\config.ts:93: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\services\supabase\supabaseRepository.ts:46: matched SERVICE_ROLE_IN_SRC? (doc/template mention, no value)
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\vite-env.d.ts:9: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\supabase\functions\finwise-copilot\function.mjs:18: matched AI_PROVIDER_API_KEY_VALUE?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\supabase\functions\finwise-copilot\index.ts:18: matched SERVICE_ROLE_IN_SRC?
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\supabase\functions\finwise-copilot\index.ts:32: matched AI_PROVIDER_API_KEY_VALUE?
+.env.local key names only: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY
+.env.local: no server-secret key names present (good)

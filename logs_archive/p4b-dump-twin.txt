@@ -1,0 +1,125 @@
+﻿--- DIGITAL TWIN (desktop) innerText ---
+F
+
+FINWISE
+
+AI
+
+Overview
+Accounts
+Transactions
+Budget
+Goals
+Analytics
+Digital Twin
+Future Lab
+BumShankar AI ðŸ”±ðŸ•‰ï¸
+Settings
+
+SAFE TO SPEND
+
+â‚¹0.00
+
+Income minus committed costs, savings, and your emergency buffer.
+
+DIGITAL TWIN
+
+Your financial digital twin
+
+A live, deterministic representation of your finances. Every number is derived from your real data and carries the evidence that produced it â€” nothing here is invented.
+
+NET WORTH
+
+â‚¹2,49,500.00
+
+Cash + investments âˆ’ debt, derived from your accounts.
+
+SAFE TO SPEND
+
+â‚¹0.00
+
+Income minus committed costs, savings and your emergency buffer.
+
+FINANCIAL HEALTH
+
+100/100
+
+Savings rate, buffer and debt blended by the deterministic engine.
+
+CASH BUFFER
+
+12.7 months
+
+Months of this month's expenses your cash could cover.
+
+Twin memory
+
+1 snapshot captured Â· latest 2026-09-21
+
+Capture snapshot
+State
+
+Where you are right now â€” accounts, this month's flow and commitments.
+
+Identity: Manual Test User Â· currency INR
+
+Pay frequency: monthly Â· expected monthly income: not set
+
+Accounts: 2 total, 2 active (Checking Ã— 1 Â· Savings Ã— 1)
+
+This month: income â‚¹60,000.00 Â· expenses â‚¹19,500.00 Â· surplus +â‚¹40,500.00
+
+Recurring commitments: â‚¹15,000.00/month across 1 active schedule
+
+Budgets: 1 planned Â· committed â‚¹20,000.00/month
+
+Goals: 1 active Â· average progress 30%
+
+Evidence: twin.state v4b.1 Â· window 2026-09 Â· computed 2026-09-21 Â· from accounts 2 Â· profile 1 Â· budgets 1 Â· goals 1 Â· recurring_transactions 1 Â· transactions 7
+
+Behaviour
+
+What you actually did this month â€” spending structure and savings outcome.
+
+3 expenses totalling â‚¹19,500.00 in 2026-09.
+
+Test Groceries
+â‚¹16,500.00 Â· 84.6%
+Test Transport
+â‚¹3,000.00 Â· 15.4%
+
+Recurring commitments: â‚¹15,000.00/month (76.9% of this month's expenses)
+
+Savings rate: 68% Â· monthly surplus +â‚¹40,500.00
+
+Evidence: twin.behaviour v4b.1 Â· window 2026-09 Â· computed 2026-09-21 Â· from transactions 3 Â· categories 2
+
+Health
+
+How the numbers score â€” buffer, Safe-to-Spend and the engine's health score.
+
+Net worth: â‚¹2,49,500.00 (cash â‚¹2,49,500.00 Â· investments â‚¹0.00 Â· debt â‚¹0.00)
+
+Health score: 100/100 Â· buffer 12.7 months
+
+Income: â‚¹60,000.00
+Upcoming essential expenses: âˆ’â‚¹19,500.00
+Committed bills: âˆ’â‚¹15,000.00
+Budget commitments: âˆ’â‚¹20,000.00
+Emergency buffer (3 months): âˆ’â‚¹58,500.00
+Safe to Spend: â‚¹0.00
+
+Savings rate: 68% Â· goals: 1 active Â· average progress 30%
+
+Evidence: twin.health v4b.1 Â· window 2026-09 Â· computed 2026-09-21 Â· from accounts 2 Â· budgets 1 Â· goals 1 Â· recurring_transactions 1 Â· transactions 7
+
+Relationships
+
+How your accounts, categories, budgets, goals and recurring commitments connect.
+
+Accounts â†” transactions
+Test Checking
+7 transactions Â· in +â‚¹1,20,000.00 Â· out â‚¹60,500.00
+Test Savings
+1 transactions Â· in â‚¹0.00 Â· out â‚¹0.00
+Categories â†” expenses

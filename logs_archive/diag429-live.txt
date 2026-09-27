@@ -1,0 +1,16 @@
+429diag live 2026-09-18T04:57:09.811Z
+FUNCTIONS status=0
+│
+◒  Fetching functions◐  Fetching functions◓  Fetching functions◑  Fetching functions◒  Fetching functions◐  Fetching functions◓  Fetching functions◑  Fetching functions◒  Fetching functions.
+  
+   ID                                   | NAME            | SLUG            | STATUS | VERSION | UPDATED_AT (UTC)    
+  --------------------------------------|-----------------|-----------------|--------|---------|---------------------
+   18469c23-3b2b-4b8c-8332-4676c8560f75 | finwise-copilot | finwise-copilot | ACTIVE | 8       | 2026-09-18 04:50:23 
+
+
+SECRETS status=0
+secret names: NAME, DIGEST, AI_MODEL, AI_PROVIDER, AI_PROVIDER_API_KEY, SUPABASE_ANON_KEY, SUPABASE_DB_URL, SUPABASE_JWKS, SUPABASE_PUBLISHABLE_KEYS, SUPABASE_SECRET_KEYS, SUPABASE_SERVICE_ROLE_KEY, SUPABASE_URL
+AI_PROVIDER present=true AI_MODEL present=true AI_PROVIDER_API_KEY present=true
+endpoint OPTIONS status=204
+endpoint unauth POST status=401
+body: {"code":"UNAUTHORIZED_NO_AUTH_HEADER","message":"Missing authorization header"}

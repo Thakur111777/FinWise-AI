@@ -1,0 +1,7 @@
+﻿engine exists: False
+harness lines: 91
+harness has CONT1: 1
+harness has esbuild: 3
+node: v24.17.0
+esbuild root: False
+report exists: False

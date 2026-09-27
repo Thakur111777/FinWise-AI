@@ -1,0 +1,420 @@
+PHASE 4C-5 — ANALYTICS + HIDDEN SPENDING UI VERIFICATION
+===========================================================
+Environment: local-mode Vite dev server :5215 (Supabase env blanked), headless Edge over CDP,
+browser-local seeded data only, no network, no DB, no AI.
+Result: 40/40 checks passed
+
+PASS  T1 local-mode dev server on :5215 — started by harness
+PASS  T1 headless Edge launched with CDP — Edg/153.0.4234.48
+PASS  T1 app loads in local fallback mode (Supabase env blanked, no redirect to /login) — origin=http://127.0.0.1:5215 pathname=/overview
+PASS  S1 /analytics route reachable (no redirect, no routing change) — pathname=/analytics
+PASS  S1 all 7 analytics + 6 hidden-spending sections render — 17 card heading(s) found
+PASS  card "Net worth trend" shows 3 expected value(s) — 2,49,500.00 | 2,45,000.00 | 2,40,000.00
+PASS  card "Health score trend" shows 3 expected value(s) — 74/100 | 71/100 | 68/100
+PASS  card "Safe-to-spend trend" shows 3 expected value(s) — 9,100.00 | 8,600.00 | 8,200.00
+PASS  card "Spending by category" shows 3 expected value(s) — Test Groceries | Uncategorized | %
+PASS  card "Budget utilization" shows 5 expected value(s) — Test Groceries | Test Transport | over budget | 134.3% | 82.5%
+PASS  card "Recurring spending" shows 4 expected value(s) — Total monthly commitment | 20,633.33 | 15,000.00 | 5,633.33
+PASS  card "Income vs expense over time" shows 6 expected value(s) — Income | Expenses | Net flow | 60,000.00 | 21,329.00 | 38,671.00
+PASS  card "Small recurring charges" shows 3 expected value(s) — TestCoffee | 180.00 | 3×
+PASS  card "Subscription-like patterns" shows 2 expected value(s) — TestStream | subscription-like pattern detected
+PASS  card "Uncategorized spending" shows 1 expected value(s) — 800.00
+PASS  card "Category concentration" shows 3 expected value(s) — represents | % of recorded expenses | Test Groceries
+PASS  card "Fee and charge patterns" shows 3 expected value(s) — TestBank Fee | TestInterest Charge | 250.00
+PASS  card "Cash tracking gaps" shows 1 expected value(s) — TestCash Wallet
+PASS  S1 every rendered section carries an Evidence line — 13/13 cards show evidence
+PASS  S1 populated page shows no insufficient placeholder and no NaN/undefined — clean
+PASS  S1 desktop (1440px) no horizontal page overflow — {"scrollWidth":1425,"innerWidth":1440}
+PASS  S1 mobile (390px) layout is genuinely 390 CSS px wide — {"sw":390,"cw":390,"innerWidth":390}
+PASS  S1 mobile (390px) no horizontal page overflow — {"sw":390,"cw":390,"innerWidth":390}
+PASS  S1 mobile (390px) no element extends past the layout viewport — none
+PASS  S1 mobile: all sections still render — all present
+PASS  baseline mobile: app shell overflow at 390px measured on /overview (context only) — {"sw":390,"cw":390}
+PASS  S1 viewing Analytics does not mutate financial core storage (read-only page) — finwise.*.v2 keys byte-identical
+PASS  S2 thin-data /analytics still loads — pathname=/analytics
+PASS  S2 all 8 un-derivable sections show "Insufficient data" (no fake zeroes) — 8/8 sections
+PASS  S2 insufficient sections show the engine's actual reason/detail — Net worth trend, Budget utilization, Recurring spending, Cash tracking gaps
+PASS  S2 available-with-empty sections show "No pattern detected" (never mistaken for insufficient data) — Small recurring charges, Uncategorized spending, Fee and charge patterns (3/3 expected)
+PASS  S2 empty-result sections still carry evidence (available state) — rule + source line present
+PASS  S2 thin-data page renders the derivable sections without placeholder money — checked for ₹0.00 / NaN / undefined
+PASS  S2 no horizontal overflow — {"sw":1425,"cw":1425}
+PASS  T9 no off-origin (Supabase/CDN/AI) requests were made — 488 requests, all same-origin incl. Vite HMR
+PASS  T9 no Supabase host was contacted (local mode: no remote call) — none
+PASS  T9 no AI endpoint was contacted — none
+PASS  T9 no uncaught page exception during both scenarios — none
+PASS  T9 no console error/warning during both scenarios — none
+PASS  T9 no failed resource load / network error — none
+
+--- captured card text (S1 populated) ---
+
+[Net worth trend]
+Net worth trend
+
+Snapshot dates and recorded net-worth values.
+
+2026-07-26
+₹2,40,000.00
+2026-08-25
+₹2,45,000.00
+2026-09-23
+₹2,49,500.00
+
+Evidence: analytics.financialStateChanges v4c.3 · from snapshots 3 · e.g. snapshots#snap-1, snapshots#snap-2, snapshots#snap-3
+
+[Health score trend]
+Health score trend
+
+Recorded financial health values from your snapshot history.
+
+2026-07-26
+68/100
+2026-08-25
+71/100
+2026-09-23
+74/100
+
+Evidence: analytics.financialStateChanges v4c.3 · from snapshots 3 · e.g. snapshots#snap-1, snapshots#snap-2, snapshots#snap-3
+
+[Safe-to-spend trend]
+Safe-to-spend trend
+
+Recorded safe-to-spend values from your snapshot history.
+
+2026-07-26
+₹8,200.00
+2026-08-25
+₹8,600.00
+2026-09-23
+₹9,100.00
+
+Evidence: analytics.financialStateChanges v4c.3 · from snapshots 3 · e.g. snapshots#snap-1, snapshots#snap-2, snapshots#snap-3
+
+[Spending by category]
+Spending by category
+
+Recorded expense totals and share per category, including uncategorized spending.
+
+Test Groceries
+₹37,500.00 · 86.3%
+Test Transport
+₹5,147.00 · 11.8%
+Uncategorized
+₹800.00 · 1.8%
+
+Evidence: analytics.categoryTrend v4c.3 · from transactions 14 · e.g. transactions#tx-cash-, transactions#tx-coffe, transactions#tx-coffe (+11 more)
+
+[Budget utilization]
+Budget utilization
+
+Recorded spent vs limit per budget. Over 100% means recorded spend exceeds the limit.
+
+Test Groceries
+₹16,500.00 of ₹20,000.00 · 82.5%
+Test Transport
+₹4,029.00 of ₹3,000.00 · 134.3% · over budget
+
+Evidence: analytics.budgetUtilization v4c.3 · from budgets 2 · transactions 9 · e.g. budgets#bud-over, budgets#bud-unde, transactions#tx-cash- (+8 more)
+
+[Recurring spending]
+Recurring spending
+
+Total monthly commitment and per-item monthly equivalents.
+
+Total monthly commitment: ₹20,633.33
+
+TestLandlord
+₹15,000.00/mo
+TestWeekly Gym
+₹5,633.33/mo
+
+Evidence: analytics.recurringImpact v4c.3 · from recurring_transactions 2 · e.g. recurring_transactions#rec-1, recurring_transactions#rec-2
+
+[Income vs expense over time]
+Income vs expense over time
+
+Recorded income, expenses and net flow per period.
+
+Net flow over the covered history: +₹76,553.00
+
+Jul 2026
+
+INCOME
+—
+EXPENSES
+₹499.00
+NET FLOW
+—
+
+Aug 2026
+
+INCOME
+₹60,000.00
+EXPENSES
+₹21,619.00
+NET FLOW
++₹38,381.00
+
+Sep 2026
+
+INCOME
+₹60,000.00
+EXPENSES
+₹21,329.00
+NET FLOW
++₹38,671.00
+
+Net flow is recorded income minus recorded expenses for each period. Periods with no recorded income or expense point are shown as — rather than being filled with a zero.
+
+Evidence: analytics.incomeExpenseTrend v4c.3 · from transactions 16 · e.g. transactions#tx-cash-, transactions#tx-coffe, transactions#tx-coffe (+13 more)
+
+[Small recurring charges]
+Small recurring charges
+
+Repeated small charges to the same payee that are easy to overlook.
+
+TestCoffee · 3×
+₹180.00 · avg ₹60.00
+TestStream · 3×
+₹1,497.00 · avg ₹499.00
+
+Evidence: analytics.detectSmallCharges v4c.4 · from transactions 6 · e.g. transactions#tx-coffe, transactions#tx-coffe, transactions#tx-coffe (+3 more)
+
+[Subscription-like patterns]
+Subscription-like patterns
+
+Charges repeating at approximately regular weekly, monthly, or yearly intervals.
+
+TestStream · subscription-like pattern detected (monthly, 3×)
+₹1,497.00
+
+Evidence: analytics.detectSubscriptionPatterns v4c.4 · from transactions 3 · recurring_transactions 2 · e.g. recurring_transactions#rec-1, recurring_transactions#rec-2, transactions#tx-old-s (+2 more)
+
+[Uncategorized spending]
+Uncategorized spending
+
+Recorded expenses without a usable category assignment.
+
+1 transactions · ₹800.00
+
+Evidence: analytics.detectUncategorizedSpending v4c.4 · from transactions 1 · e.g. transactions#tx-uncat
+
+[Category concentration]
+Category concentration
+
+Categories representing a large share of recorded expenses.
+
+Test Groceries · represents 86.3% of recorded expenses
+₹37,500.00
+
+Evidence: analytics.detectCategoryConcentration v4c.4 · from transactions 3 · e.g. transactions#tx-groc1, transactions#tx-groc2, transactions#tx-prev-
+
+[Fee and charge patterns]
+Fee and charge patterns
+
+Explicitly labelled fees, charges, interest, or penalties.
+
+TestBank Fee · 1×
+₹250.00
+TestCoffee · 3×
+₹180.00
+TestInterest Charge · 1×
+₹120.00
+
+Evidence: analytics.detectFeePatterns v4c.4 · from transactions 5 · e.g. transactions#tx-coffe, transactions#tx-coffe, transactions#tx-coffe (+2 more)
+
+[Cash tracking gaps]
+Cash tracking gaps
+
+Cash accounts with no recorded cash transactions — a data-coverage gap, not proof of spending.
+
+Cash account has no recorded cash transactions: TestCash Wallet
+
+Evidence: analytics.detectCashGaps v4c.4 · from accounts 2 · e.g. accounts#acc-cash, accounts#acc-cash
+
+[S1 mobile overflow offenders]
+[]
+
+[S2 body]
+F
+
+FINWISE
+
+AI
+
+Overview
+Accounts
+Transactions
+Budget
+Goals
+Analytics
+Digital Twin
+Future Lab
+BumShankar AI 🔱🕉️
+Settings
+
+SAFE TO SPEND
+
+₹3,400.00
+
+Income minus committed costs, savings, and your emergency buffer.
+
+ANALYTICS
+
+Behavior and trend intelligence
+
+Deterministic trends and hidden-spending checks derived from your real data. Every number carries its evidence — nothing here is invented or predicted.
+
+Income vs spending
+Income
+₹5,000.00
+Expenses
+₹400.00
+Savings rate
+
+92%
+
+92% of this month's income kept after expenses.
+
+Buffer coverage
+
+14 mo
+
+Months of cash on hand against current monthly spending.
+
+Net worth trend
+
+Snapshot dates and recorded net-worth values.
+
+Insufficient data
+
+Not enough snapshot history to show a trend.
+
+Financial-state history needs at least 2 Digital Twin snapshots. Found 1 snapshot(s).
+
+Health score trend
+
+Recorded financial health values from your snapshot history.
+
+Insufficient data
+
+Not enough snapshot history to show a trend.
+
+Financial-state history needs at least 2 Digital Twin snapshots. Found 1 snapshot(s).
+
+Safe-to-spend trend
+
+Recorded safe-to-spend values from your snapshot history.
+
+Insufficient data
+
+Not enough snapshot history to sho
+
+--- console errors ---
+none
+
+--- page exceptions ---
+none
+
+--- failed requests ---
+none
+
+--- requests observed ---
+http://127.0.0.1:5215/overview
+http://127.0.0.1:5215/node_modules/.vite/deps/rolldown-runtime-DC62tzP2.js?v=ac14d99f
+http://127.0.0.1:5215/node_modules/.vite/deps/react-dom.js?v=d069fc39
+http://127.0.0.1:5215/@vite/client
+http://127.0.0.1:5215/src/main.tsx
+http://127.0.0.1:5215/@react-refresh
+http://127.0.0.1:5215/node_modules/.vite/deps/react.js?v=d069fc39
+http://127.0.0.1:5215/node_modules/.vite/deps/react-dom_client.js?v=6b500536
+http://127.0.0.1:5215/node_modules/.vite/deps/react-router-dom.js?v=3b80c124
+http://127.0.0.1:5215/src/ai/copilotContext.tsx
+http://127.0.0.1:5215/src/features/auth/authContext.tsx
+http://127.0.0.1:5215/src/features/dashboard/financialDataContext.tsx
+http://127.0.0.1:5215/src/features/intelligence/financialIntelligenceContext.tsx
+http://127.0.0.1:5215/src/features/alerts/SmartAlertPersistenceRunner.tsx
+http://127.0.0.1:5215/src/App.tsx
+http://127.0.0.1:5215/src/index.css
+http://127.0.0.1:5215/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=d069fc39
+http://127.0.0.1:5215/src/services/supabase/client.ts
+http://127.0.0.1:5215/src/features/auth/authContextCore.ts
+http://127.0.0.1:5215/src/ai/copilotService.ts
+http://127.0.0.1:5215/src/ai/copilotContextCore.ts
+http://127.0.0.1:5215/src/features/dashboard/financialDataContextCore.ts
+http://127.0.0.1:5215/src/services/financial/state.ts
+http://127.0.0.1:5215/src/services/financial/localStorageRepository.ts
+http://127.0.0.1:5215/src/services/supabase/supabaseRepository.ts
+http://127.0.0.1:5215/src/features/auth/useAuth.ts
+http://127.0.0.1:5215/src/services/financial/profileService.ts
+http://127.0.0.1:5215/src/services/financial/accountService.ts
+http://127.0.0.1:5215/src/services/financial/categoryService.ts
+http://127.0.0.1:5215/src/services/financial/transactionService.ts
+http://127.0.0.1:5215/src/services/financial/recurringService.ts
+http://127.0.0.1:5215/src/services/financial/budgetService.ts
+http://127.0.0.1:5215/src/services/financial/goalService.ts
+http://127.0.0.1:5215/src/features/intelligence/financialIntelligenceContextCore.ts
+http://127.0.0.1:5215/src/features/dashboard/useFinancialData.ts
+http://127.0.0.1:5215/src/features/dashboard/useDashboardMetrics.ts
+http://127.0.0.1:5215/src/services/financial/intelligenceRepositoryFactory.ts
+http://127.0.0.1:5215/src/intelligence/twin.ts
+http://127.0.0.1:5215/src/lib/date.ts
+http://127.0.0.1:5215/src/features/intelligence/useFinancialIntelligence.ts
+http://127.0.0.1:5215/src/features/analytics/analyticsEngine.ts
+http://127.0.0.1:5215/src/features/analytics/hiddenSpendingDetector.ts
+http://127.0.0.1:5215/src/features/financial/selectors.ts
+http://127.0.0.1:5215/src/services/financial/smartAlertPersistence.ts
+http://127.0.0.1:5215/src/features/alerts/smartAlertEngine.ts
+http://127.0.0.1:5215/src/features/auth/RequireAuth.tsx
+http://127.0.0.1:5215/src/components/layout/AppShell.tsx
+http://127.0.0.1:5215/src/pages/AuthPage.tsx
+http://127.0.0.1:5215/src/pages/LandingPage.tsx
+http://127.0.0.1:5215/src/pages/OverviewPage.tsx
+http://127.0.0.1:5215/src/pages/AccountsPage.tsx
+http://127.0.0.1:5215/src/pages/TransactionsPage.tsx
+http://127.0.0.1:5215/src/pages/BudgetPage.tsx
+http://127.0.0.1:5215/src/pages/GoalsPage.tsx
+http://127.0.0.1:5215/src/pages/AnalyticsPage.tsx
+http://127.0.0.1:5215/src/pages/DigitalTwinPage.tsx
+http://127.0.0.1:5215/src/pages/FutureLabPage.tsx
+http://127.0.0.1:5215/src/pages/AIAssistantPage.tsx
+http://127.0.0.1:5215/src/pages/SettingsPage.tsx
+http://127.0.0.1:5215/src/pages/PrivacyCenterPage.tsx
+http://127.0.0.1:5215/node_modules/.vite/deps/@supabase_supabase-js.js?v=c875a8f4
+http://127.0.0.1:5215/src/services/financial/repository.ts
+http://127.0.0.1:5215/src/services/supabase/mappers.ts
+http://127.0.0.1:5215/src/services/supabase/config.ts
+http://127.0.0.1:5215/src/services/financial/validation.ts
+http://127.0.0.1:5215/src/config/currencies.ts
+http://127.0.0.1:5215/src/config/categories.ts
+http://127.0.0.1:5215/src/services/financial/stateHelpers.ts
+http://127.0.0.1:5215/src/services/financial/result.ts
+http://127.0.0.1:5215/src/lib/money.ts
+http://127.0.0.1:5215/node_modules/vite/dist/client/env.mjs
+http://127.0.0.1:5215/src/intelligence/finance.ts
+http://127.0.0.1:5215/src/services/supabase/supabaseIntelligenceRepository.ts
+http://127.0.0.1:5215/src/services/financial/localStorageIntelligenceRepository.ts
+http://127.0.0.1:5215/src/intelligence/evidence.ts
+http://127.0.0.1:5215/src/intelligence/section.ts
+http://127.0.0.1:5215/node_modules/.vite/deps/lucide-react.js?v=6f201950
+http://127.0.0.1:5215/src/components/layout/Sidebar.tsx
+http://127.0.0.1:5215/src/components/layout/MobileNav.tsx
+http://127.0.0.1:5215/src/components/ui/Card.tsx
+http://127.0.0.1:5215/src/components/ui/EmptyState.tsx
+http://127.0.0.1:5215/src/lib/currency.ts
+http://127.0.0.1:5215/src/components/ui/forms.tsx
+http://127.0.0.1:5215/src/components/ui/Modal.tsx
+http://127.0.0.1:5215/src/components/ui/ConfirmDialog.tsx
+http://127.0.0.1:5215/src/features/financial/transactionForm.tsx
+http://127.0.0.1:5215/src/features/financial/recurringForm.tsx
+http://127.0.0.1:5215/src/features/financial/transactionQueries.ts
+http://127.0.0.1:5215/src/pages/BudgetFormModal.tsx
+http://127.0.0.1:5215/src/pages/GoalFormModal.tsx
+http://127.0.0.1:5215/src/pages/AnalyticsSections.tsx
+http://127.0.0.1:5215/src/ai/useCopilot.ts
+http://127.0.0.1:5215/src/services/financial/intelligenceRepository.ts
+http://127.0.0.1:5215/src/config/routes.ts
+http://127.0.0.1:5215/src/lib/utils.ts
+http://127.0.0.1:5215/node_modules/.vite/deps/clsx.js?v=a3c71019
+http://127.0.0.1:5215/node_modules/.vite/deps/tailwind-merge.js?v=a1d6cc2f
+http://127.0.0.1:5215/favicon.svg
+http://127.0.0.1:5215/analytics

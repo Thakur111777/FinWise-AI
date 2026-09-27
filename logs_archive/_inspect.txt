@@ -1,0 +1,26 @@
+=== git status ===
+git : fatal: not a git repository (or any of the parent directories): .git
+At line:1 char:46
++ ... ); $r += '=== git status ==='; $r += (git status --short 2>&1 | Out-S ...
++                                           ~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (fatal: not a gi...ectories): .git:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+=== git log ===
+git : fatal: not a git repository (or any of the parent directories): .git
+At line:1 char:117
++ ... ); $r += '=== git log ==='; $r += (git log --oneline -10 2>&1 | Out-S ...
++                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (fatal: not a gi...ectories): .git:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+=== engine exists? ===
+smartAlertEngine.ts=False
+alerts dir=False
+=== harness ===
+verify_phase4d.mjs lines=91
+=== backups/remnants ===
+=== 4d report ===
+4d2-verify-report.txt=False

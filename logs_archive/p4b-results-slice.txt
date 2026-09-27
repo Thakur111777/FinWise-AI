@@ -1,0 +1,29 @@
+﻿      "pass": false,
+      "detail": ""
+    },
+    {
+      "name": "T5 after refresh: snapshot row count unchanged (no duplicates)",
+      "pass": false,
+      "detail": "count=2"
+    },
+    {
+      "name": "T5 after refresh: transactions/accounts/budgets/goals byte-identical (no duplicates)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "T8 deterministic: reload re-derives an identical twin (rendered values contain no randomness/time drift)",
+      "pass": false,
+      "detail": "diff@762: \"hs Months of this month's expenses your cash could cover. Twin memory 1 snapshot captured Â· latest 2026-09-21 Capture snapshot State Where y\" vs \"hs Months of this month's expenses your cash could cover. Twin memory 2 snapshots captured Â· latest 2026-09-21 Capture snapshot State Where \""
+    },
+    {
+      "name": "T7 desktop (1440px): no horizontal overflow",
+      "pass": true,
+      "detail": "{\"sw\":1425,\"cw\":1425}"
+    },
+    {
+      "name": "T4 empty data: insufficient-data reasons shown with named missing collections",
+      "pass": true,
+      "detail": "Add an account so your twin can describe your financial state. (needs: accounts) | Your twin needs accounts or transactions before a state summary exists. (needs: accounts, transactions) | No expenses are recorded for this month yet, so there is no behaviour to describe. (needs: transactions) | Add accounts, transactions, budgets or goals and your twin can start scoring your financial health. (needs: accounts, transactions, budgets, goals)"
+    },
+    {

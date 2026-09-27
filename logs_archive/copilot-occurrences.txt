@@ -1,0 +1,91 @@
+﻿C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:4: askCopilot,
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:5: CopilotError,
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:6: type CopilotHistoryMessage,
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:7: } from './copilotService';
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:9: CopilotContext,
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:10: type CopilotContextValue,
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:11: type CopilotMessage,
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:12: type CopilotStatus,
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:13: } from './copilotContextCore';
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:16: * Session-scoped Copilot conversation state.
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:18: * Types and the context object live in `copilotContextCore.ts` (so this file
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:32: export function CopilotProvider({ children }: { children: ReactNode }) {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:33: const [messages, setMessages] = useState<CopilotMessage[]>([]);
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:34: const [status, setStatus] = useState<CopilotStatus>('idle');
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:39: const messagesRef = useRef<CopilotMessage[]>([]);
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:48: const history: CopilotHistoryMessage[] = messagesRef.current
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:52: const reply = await askCopilot(prompt, history);
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:65: cause instanceof CopilotError
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:113: const value = useMemo<CopilotContextValue>(
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContext.tsx:126: return <CopilotContext.Provider value={value}>{children}</CopilotContext.Provider>;
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContextCore.ts:2: * The context/value contract for the Copilot conversation. Split into its own
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContextCore.ts:3: * file so `copilotContext.tsx` exports only components (react-refresh rule) —
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContextCore.ts:8: export type CopilotStatus = 'idle' | 'thinking' | 'error';
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContextCore.ts:10: export interface CopilotMessage {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContextCore.ts:18: export interface CopilotContextValue {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContextCore.ts:19: messages: CopilotMessage[];
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContextCore.ts:20: status: CopilotStatus;
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotContextCore.ts:28: export const CopilotContext = createContext<CopilotContextValue | null>(null);
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:3: import type { CopilotHistoryMessage } from '../types/ai';
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:6: * Browser-side Copilot boundary.
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:10: * `finwise-copilot`, which derives authoritative financial context
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:18: export type { CopilotHistoryMessage };
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:20: export interface CopilotExchange {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:26: export type CopilotFailureCode =
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:34: export class CopilotError extends Error {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:35: readonly code: CopilotFailureCode;
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:37: constructor(code: CopilotFailureCode, message: string) {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:39: this.name = 'CopilotError';
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:44: const FUNCTION_NAME = 'finwise-copilot';
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:46: interface CopilotResponsePayload {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:55: const STATUS_TO_CODE: Record<number, CopilotFailureCode> = {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:66: const CODE_TO_MESSAGE: Record<CopilotFailureCode, string> = {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:67: unauthenticated: 'Please sign in again to use FinWise Copilot.',
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:69: rate_limited: 'FinWise Copilot is busy right now. Please try again in a moment.',
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:75: async function toCopilotError(cause: unknown): Promise<CopilotError> {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:81: const payload = (await cause.context.json()) as CopilotResponsePayload | null;
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:101: return new CopilotError(code, detail ?? CODE_TO_MESSAGE[code]);
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:103: if (cause instanceof CopilotError) return cause;
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:104: return new CopilotError('server', CODE_TO_MESSAGE.server);
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:108: * Ask FinWise Copilot a question.
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:113: export async function askCopilot(
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:115: history: CopilotHistoryMessage[] = [],
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:116: ): Promise<CopilotExchange> {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:121: throw new CopilotError(
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:123: 'FinWise Copilot is unavailable: the Supabase backend is not configured in this environment.',
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:126: let payload: CopilotResponsePayload | null;
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:132: payload = (data ?? null) as CopilotResponsePayload | null;
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:134: throw await toCopilotError(cause);
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:138: throw new CopilotError('server', CODE_TO_MESSAGE.server);
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\copilotService.ts:143: throw new CopilotError('server', 'The Copilot returned an empty response.');
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\useCopilot.ts:2: import { CopilotContext, type CopilotContextValue } from './copilotContextCore';
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\useCopilot.ts:5: * Accessor for the session-scoped Copilot conversation. Lives in its own file
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\useCopilot.ts:6: * (rather than beside `CopilotProvider`) so the provider file exports only
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\useCopilot.ts:9: export function useCopilot(): CopilotContextValue {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\useCopilot.ts:10: const context = useContext(CopilotContext);
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\ai\useCopilot.ts:12: throw new Error('useCopilot must be used within a CopilotProvider');
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:4: import { useCopilot } from '../ai/useCopilot';
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:10: * FinWise Copilot page.
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:14: * the Copilot cannot mutate financial data in Phase 3C.
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:27: useCopilot();
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:46: const scroller = document.getElementById('copilot-messages');
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:54: <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Copilot</p>
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:55: <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900">FinWise Copilot</h1>
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:58: Copilot explains; it never changes your records.
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:70: id="copilot-messages"
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:78: title="Ask FinWise Copilot anything about your finances"
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:79: description="Copilot answers using your actual FinWise data — never invented figures."
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:117: FinWise Copilot is thinking…
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:136: aria-label="Ask FinWise Copilot"
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\pages\AIAssistantPage.tsx:147: Copilot is informational only and cannot create or change transactions,
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\types\ai.ts:13: * A single prior conversational turn sent with a Copilot request.
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\types\ai.ts:19: export interface CopilotHistoryMessage {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\types\ai.ts:25: * Request the browser sends to the secure FinWise Copilot Edge Function.
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\types\ai.ts:34: export interface CopilotRequest {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\types\ai.ts:41: history?: CopilotHistoryMessage[];
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\types\ai.ts:53: export interface CopilotResponse {
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\main.tsx:4: import { CopilotProvider } from './ai/copilotContext';
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\main.tsx:17: {/* Copilot state is session-scoped UI only: it talks exclusively to
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\main.tsx:18: the finwise-copilot Edge Function and consumes no repository data,
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\main.tsx:20: <CopilotProvider>
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\main.tsx:22: </CopilotProvider>

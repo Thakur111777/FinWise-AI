@@ -1,0 +1,10 @@
+=== node ===
+v24.17.0
+=== esbuild nested under vite? ===
+False
+=== esbuild pkg anywhere shallow ===
+
+=== alerts dir ===
+False
+=== 4D-1 arch doc? ===
+4d2-eslint.txt, 4d2-final-tsc.txt, 4d2-final-verify.txt, 4d2-tsc.txt, 4d2-verify-final.txt, 4d2-verify.txt, env4d.txt, resume4d3-state.txt, verify_phase4d.mjs

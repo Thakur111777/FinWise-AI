@@ -1,0 +1,6 @@
+--- root txt/md files ---
+--- files containing CONT1 or record( ---
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\resume-a-state.txt
+C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\verify_phase4d.mjs
+--- esbuild anywhere in node_modules (top 2 levels) ---
+none

@@ -1,0 +1,336 @@
+=== supabase/functions/finwise-copilot listing ===
+function.mjs
+import_map.json
+index.ts
+index.ts.bak
+node_modules
+package-lock.json
+package.json
+scope.ts
+
+=== supabase/ listing ===
+.temp
+config.toml
+functions
+migrations
+
+=== root listing ===
+.env.example
+.env.local
+.gitignore
+build-err.txt
+build-out.txt
+build.err
+build.log
+check-traces.cjs
+closure-live.txt
+closure-live2.txt
+deploy-503fix.cjs
+deploy-503fix.txt
+deploy-api-output.txt
+deploy-api.cjs
+deploy-function.cjs
+deploy-helper.cjs
+deploy-helper2.cjs
+deploy-output.txt
+deploy-output2.txt
+deploy-output3.txt
+deploy-output4.txt
+deploy-output5.txt
+deploy-output6.txt
+deploy-test1fix.cjs
+deploy-test1fix.txt
+deploy-truncfix.cjs
+deploy-truncfix.txt
+diag-help-writer.cjs
+diag-help.txt
+diag-inspect-writer.cjs
+diag-inspect.txt
+diag429-live.cjs
+diag429-live.txt
+direct-regression-out.txt
+direct-regression.cjs
+dist
+eslint-fresh.txt
+eslint-out.txt
+eslint.config.js
+final-check.cjs
+final-check.txt
+final-closure-fresh.cjs
+final-closure-writer.cjs
+final-closure.txt
+FINWISE_PRODUCT_RULES.md
+fix-import-out.txt
+fix-import.cjs
+index.html
+inspect-deno.cjs
+install-supabase-cli.cjs
+lint-out.txt
+live-check-writer.cjs
+live-check.txt
+node_modules
+package-lock.json
+package.json
+PHASE_3A_SUPABASE_FOUNDATION.md
+PHASE_3B_PERSISTENCE_AUTH.md
+PHASE_3C_COPILOT.md
+postcss.config.js
+postdeploy-503fix.cjs
+postdeploy-503fix.txt
+postdeploy-test1fix.cjs
+postdeploy-test1fix.txt
+PROJECT_ARCHITECTURE.md
+public
+README.md
+regress-503fix.cjs
+regress-503fix.txt
+regression-out.txt
+regression-writer.cjs
+regression2-out.txt
+regression2-writer.cjs
+run-build.cjs
+run-closure-live.cjs
+run-closure-live2.cjs
+run-deploy.cjs
+run-eslint.cjs
+run-eslint2.cjs
+run-fix.cjs
+run-lint.cjs
+run-s.cjs
+run-scan.cjs
+run-supabase.cjs
+run-t.cjs
+run-tsc.cjs
+run-v.cjs
+run-v3a.cjs
+run-v3b.cjs
+run-verify.cjs
+run-vite.cjs
+s-fresh.txt
+scan-out.txt
+scope-test-out.txt
+src
+supabase
+t-fresh.txt
+tailwind.config.js
+test-scope.ts
+test1fix-regression.cjs
+test1fix-regression.txt
+truncfix-verify-writer.cjs
+truncfix-verify.txt
+tsc-out.txt
+tsconfig.app.json
+tsconfig.json
+tsconfig.node.json
+v-fresh.txt
+v3a-fresh.txt
+v3b-fresh.txt
+verify-out.txt
+verify_live_phase3a.mjs
+verify_phase3a.mjs
+verify_phase3b.mjs
+vite-out.txt
+vite.config.ts
+
+=== index.ts lines 1-40 ===
+import { createClient } from 'jsr:@supabase/supabase-js@2';
+import type { SupabaseClient } from 'jsr:@supabase/supabase-js@2';
+import { classifyFinancialIntent } from './scope.ts';
+
+/**
+ * FinWise Copilot — Supabase Edge Function (Phase 3C secure AI boundary).
+ *
+ * Request flow:
+ *   React Copilot UI → copilotService (browser-safe anon key + session JWT)
+ *     → POST /functions/v1/finwise-copilot
+ *     → Bearer JWT verified via auth.getUser(jwt)  [identity from token only]
+ *     → DB queries run under the caller's JWT (RLS enforces user isolation)
+ *     → structured financial context built server-side (no client-trusted data)
+ *     → AI provider called with the server-side secret only
+ *     → response normalized → safe JSON to the browser
+ *
+ * Security invariants:
+ *   - The AI provider secret exists only in Edge Function env vars.
+ *   - No service-role key is used anywhere; RLS remains authoritative.
+ *   - No client-supplied user_id is ever trusted.
+ *   - No email, name, auth token, or account id is sent to the AI provider.
+ *   - Transaction merchant/description ARE user free-text and can contain
+ *     accidental personal information; they are therefore length-truncated
+ *     (never removed) and the system prompt forbids repeating them verbatim.
+ *   - Read/reason/explain only: the function never mutates financial data.
+ */
+
+const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
+const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY') ?? '';
+
+const AI_PROVIDER = (Deno.env.get('AI_PROVIDER') ?? 'gemini').toLowerCase();
+const AI_MODEL = Deno.env.get('AI_MODEL') ?? 'gemini-3.8-flash';
+const AI_PROVIDER_API_KEY = Deno.env.get('AI_PROVIDER_API_KEY') ?? '';
+
+const MAX_PROMPT_LENGTH = 2000;
+const MAX_HISTORY_MESSAGES = 12;
+const MAX_HISTORY_MESSAGE_LENGTH = 2000;
+const RECENT_TRANSACTIONS_LIMIT = 25;
+const TOP_CATEGORY_LIMIT = 5;
+const INSIGHT_LIMIT = 8;
+
+=== scope.ts lines 1-28 ===
+/**
+ * FinWise Copilot — open-ended financial-intent scope classifier.
+ *
+ * DESIGN CONTRACT (deliberately NOT a question whitelist):
+ *   The Copilot supports OPEN-ENDED financial intent: balances, income,
+ *   expenses, spending, cash flow, budgets, savings, goals, affordability,
+ *   planning, trade-offs, what-if scenarios, debt, credit, taxes, insurance,
+ *   investing, and the financial impact of real-world decisions — including
+ *   questions never anticipated at development time.
+ *
+ * Classification strategy (fail-open, high-precision rejection):
+ *   1. ANY financial-intent signal  -> in_scope (broad concept lexicon, not a
+ *      list of allowed questions).
+ *   2. ELSE a clearly non-financial domain marker (coding, science,
+ *      entertainment, sports, factual general knowledge) -> out_of_scope.
+ *      Gemini is never called for these, preserving quota.
+ *   3. ELSE a bare informational query ("tell me about X", "what is X") with
+ *      NO personal/financial anchor (my/me/mine/our/we/i/finwise)
+ *      -> out_of_scope ("Tell me about Japan." vs "Tell me about my spending.").
+ *   4. ELSE -> in_scope. Ambiguous but plausibly financial questions
+ *      ("What laptop should I buy?") stay in the Copilot flow rather than
+ *      being rejected — false rejection is prioritised against.
+ *
+ * This module is PURE (no Deno/network APIs) so it is unit-testable in Node.
+ */
+
+export type FinancialIntentVerdict = 'in_scope' | 'out_of_scope';
+
+
+=== supabase/config.toml ===
+[project]
+id = "dufiwbxkvhorrjmckrwm"
+
+
+=== tsconfig.json ===
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+
+
+=== tsconfig.app.json ===
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "types": ["vite/client"],
+    "allowArbitraryExtensions": true,
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
+}
+
+
+=== tsconfig.node.json ===
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023"],
+    "types": ["node"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "module": "nodenext",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["vite.config.ts"]
+}
+
+
+=== .vscode/settings.json (absent) ===
+
+=== .vscode/extensions.json (absent) ===
+
+=== deno.json (absent) ===
+
+=== deno.jsonc (absent) ===
+
+=== import_map.json (absent) ===
+
+=== supabase/deno.json (absent) ===
+
+=== supabase/import_map.json (absent) ===
+
+=== supabase/functions/deno.json ===
+{"imports": {"@supabase/supabase-js": "jsr:@supabase/supabase-js@2"}}
+
+=== supabase/functions/import_map.json (absent) ===
+
+=== supabase/functions/finwise-copilot/deno.json (absent) ===
+
+=== supabase/functions/finwise-copilot/import_map.json ===
+{
+  "imports": {
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2/dist/module",
+    "@supabase/supabase-js/dist/module": "https://esm.sh/@supabase/supabase-js@2/dist/module",
+    "@supabase/auth-js": "https://esm.sh/@supabase/auth-js@2/dist/module",
+    "@supabase/auth-js/dist/module": "https://esm.sh/@supabase/auth-js@2/dist/module",
+    "@supabase/postgrest-js": "https://esm.sh/@supabase/postgrest-js@2/dist/module",
+    "@supabase/postgrest-js/dist/module": "https://esm.sh/@supabase/postgrest-js@2/dist/module",
+    "@supabase/realtime-js": "https://esm.sh/@supabase/realtime-js@2/dist/module",
+    "@supabase/realtime-js/dist/module": "https://esm.sh/@supabase/realtime-js@2/dist/module",
+    "@supabase/functions-js": "https://esm.sh/@supabase/functions-js@2/dist/module",
+    "@supabase/functions-js/dist/module": "https://esm.sh/@supabase/functions-js@2/dist/module",
+    "@supabase/storage-js": "https://esm.sh/@supabase/storage-js@2/dist/module",
+    "@supabase/storage-js/dist/module": "https://esm.sh/@supabase/storage-js@2/dist/module"
+  }
+}
+
+=== VS Code user settings.json (read-only peek) ===
+(no deno-related lines)
+
+=== git status --porcelain ===
+exit=128
+fatal: not a git repository (or any of the parent directories): .git
+
+
+=== git diff --stat HEAD (tail 40) ===
+exit=129
+
+
+=== deno --version ===
+exit=1
+'deno' is not recognized as an internal or external command,
+operable program or batch file.
+
+
+=== VS Code extensions containing deno/supabase ===
+exit=0
+(no deno/supabase extensions found or CLI unavailable)

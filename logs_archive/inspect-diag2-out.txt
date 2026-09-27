@@ -1,0 +1,52 @@
+=== EXT-LIST-BEFORE exit=0 ===
+--stdout--
+denoland.vscode-deno
+oracle.oracle-java
+ritwickdey.liveserver
+rodrigovallades.es7-react-js-snippets
+saoudrizwan.claude-dev
+yandeu.five-server
+
+--stderr--
+
+=== EXT-INSTALL-DENO exit=0 ===
+--stdout--
+Installing extensions...
+Extension 'denoland.vscode-deno' is already installed.
+
+--stderr--
+(node:38884) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `Code --trace-deprecation ...` to show where the warning was created)
+
+=== EXT-LIST-AFTER exit=0 ===
+--stdout--
+denoland.vscode-deno
+oracle.oracle-java
+ritwickdey.liveserver
+rodrigovallades.es7-react-js-snippets
+saoudrizwan.claude-dev
+yandeu.five-server
+
+--stderr--
+
+=== CONSTRUCT COUNTS ===
+index.ts  Deno.<x> occurrences          : 6
+index.ts  jsr: import specifiers        : 2
+index.ts  ./scope import specifier      : 1
+index.ts  Deno.env.get( occurrences     : 5
+index.ts  Deno.serve( occurrences       : 1
+test-scope.ts  'node:*' import specifiers: 2
+test-scope.ts  top-level await statements: 0
+test-scope.ts  process. usages           : 1
+=== TSC-SIM-INDEX (expected: 4x TS2304 Deno + 1x TS2307 jsr + 1x TS2307 ./scope.js) exit=1 ===
+--stdout--
+error TS5112: tsconfig.json is present but will not be loaded if files are specified on commandline. Use '--ignoreConfig' to skip this error.
+
+--stderr--
+
+=== TSC-SIM-TESTSCOPE (expected: 1x TLA + 2x TS2307 node:*) exit=1 ===
+--stdout--
+error TS5112: tsconfig.json is present but will not be loaded if files are specified on commandline. Use '--ignoreConfig' to skip this error.
+
+--stderr--
+

@@ -1,0 +1,31 @@
+exit=0
+ofiles <-> ProfileRow (11 columns identical)
+  ok    accounts <-> AccountRow (11 columns identical)
+  ok    categories <-> CategoryRow (7 columns identical)
+  ok    transactions <-> TransactionRow (16 columns identical)
+  ok    recurring_transactions <-> RecurringTransactionRow (17 columns identical)
+  ok    budgets <-> BudgetRow (10 columns identical)
+  ok    goals <-> GoalRow (10 columns identical)
+  ok    financial_snapshots <-> FinancialSnapshotRow (12 columns identical)
+  ok    financial_insights <-> FinancialInsightRow (9 columns identical)
+  ok    life_events <-> LifeEventRow (8 columns identical)
+  ok    scenarios <-> ScenarioRow (8 columns identical)
+  ok    decisions <-> DecisionRow (7 columns identical)
+  ok    financial_memories <-> FinancialMemoryRow (7 columns identical)
+
+[3] supabaseRepository.ts COLUMNS selects vs Row interfaces
+  ok    COLUMNS.profile selects every ProfileRow column
+  ok    COLUMNS.accounts selects every AccountRow column
+  ok    COLUMNS.categories selects every CategoryRow column
+  ok    COLUMNS.transactions selects every TransactionRow column
+  ok    COLUMNS.recurringTransactions selects every RecurringTransactionRow column
+  ok    COLUMNS.budgets selects every BudgetRow column
+  ok    COLUMNS.goals selects every GoalRow column
+
+[4] Migration default-category seed vs src/config/categories.ts
+  ok    income defaults identical (6): Salary, Freelance, Business, Investment, Gift, Other
+  ok    expense defaults identical (12)
+
+ALL CHECKS PASSED
+
+

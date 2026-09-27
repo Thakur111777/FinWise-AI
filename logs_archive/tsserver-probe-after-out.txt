@@ -1,0 +1,5 @@
+# tsserver exact-diagnostics probe — mode=after
+# tsserver: node_modules/typescript/lib/tsserver.js
+  SKIP test-scope.ts: timeout waiting for semanticDiag test-scope.ts
+  SKIP index.ts: timeout waiting for semanticDiag index.ts
+PROBE-DONE

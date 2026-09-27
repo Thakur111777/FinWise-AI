@@ -1,0 +1,14 @@
+post-deploy 2026-09-18T04:26:21.482Z
+FUNCTIONS status=0
+│
+◒  Fetching functions◐  Fetching functions◓  Fetching functions◑  Fetching functions◒  Fetching functions◐  Fetching functions
+  
+   ID                                   | NAME            | SLUG            | STATUS | VERSION | UPDATED_AT (UTC)    
+  --------------------------------------|-----------------|-----------------|--------|---------|---------------------
+   18469c23-3b2b-4b8c-8332-4676c8560f75 | finwise-copilot | finwise-copilot | ACTIVE | 5       | 2026-09-18 04:25:42 
+
+
+endpoint OPTIONS status=204
+endpoint unauth POST status=401
+body: {"code":"UNAUTHORIZED_NO_AUTH_HEADER","message":"Missing authorization header"}
+tsc -b exit=0 

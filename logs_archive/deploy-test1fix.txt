@@ -1,0 +1,10 @@
+exit=0
+STDOUT:
+Deployed Functions on project dufiwbxkvhorrjmckrwm: finwise-copilot
+You can inspect your deployment in the Dashboard: https://supabase.com/dashboard/project/dufiwbxkvhorrjmckrwm/functions
+
+STDERR:
+WARNING: Functions using deprecated import_map.json (please migrate to deno.json): finwise-copilot
+Uploading asset (finwise-copilot): supabase/functions/finwise-copilot/import_map.json
+Uploading asset (finwise-copilot): supabase/functions/finwise-copilot/index.ts
+

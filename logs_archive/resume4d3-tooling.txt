@@ -1,0 +1,10 @@
+=== A. esbuild import ===
+ESBUILD_ERR Cannot find package 'esbuild' imported from C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\[eval]
+=== B. require.resolve esbuild ===
+RESOLVE_ERR Cannot find module 'esbuild'
+Require stack:
+- C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\[eval]
+=== C. node native .ts import (section.ts) ===
+TS_OK exports=6
+=== D. node native .ts chained ext-less (currency.ts -> config/currencies) ===
+CHAIN_ERR Cannot find module 'C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\config\currencies' imported from C:\Users\Prashant Chadha\OneDrive\Desktop\College\FinWise-AI\src\lib\currency.ts

@@ -1,0 +1,42 @@
+﻿PASS  no console errors/warnings during the whole session
+      none
+PASS  no uncaught page exceptions during the whole session
+      none
+PASS  no failed network requests during the whole session
+      none
+
+--- console errors ---
+(none)
+
+--- page exceptions ---
+(none)
+
+--- failed requests ---
+(none)
+
+--- DIGITAL TWIN (desktop) innerText ---
+F
+
+FINWISE
+
+AI
+
+Overview
+Accounts
+Transactions
+Budget
+Goals
+Analytics
+Digital Twin
+Future Lab
+BumShankar AI ðŸ”±ðŸ•‰ï¸
+Settings
+
+SAFE TO SPEND
+
+â‚¹0.00
+
+Income minus committed costs, savings, and your emergency buffer.
+
+DIGITAL TWIN
+

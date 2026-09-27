@@ -1,0 +1,15 @@
+PHASE 4D-3 SMART ALERT PERSISTENCE VERIFICATION
+===============================================
+Result: 11/11 checks passed
+
+PASS  fingerprint includes stable key and period
+PASS  engine alert maps into the existing financial_insights row shape
+PASS  stable key, period, metrics and evidence survive details round-trip
+PASS  repeated sync is idempotent for one user fingerprint
+PASS  duplicate fingerprints within one generated batch write once
+PASS  a changed active alert updates its existing row
+PASS  different periods persist as separate fingerprints
+PASS  insufficient data does not read or write persistence
+PASS  dismissal uses the existing details field and is retained on next sync
+PASS  ordinary financial insights are not dismissible as smart alerts
+PASS  persistence uses repository boundary and has no direct storage or network access

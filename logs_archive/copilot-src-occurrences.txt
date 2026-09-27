@@ -1,0 +1,91 @@
+﻿src\ai\copilotContext.tsx:4: askCopilot,
+src\ai\copilotContext.tsx:5: CopilotError,
+src\ai\copilotContext.tsx:6: type CopilotHistoryMessage,
+src\ai\copilotContext.tsx:7: } from './copilotService';
+src\ai\copilotContext.tsx:9: CopilotContext,
+src\ai\copilotContext.tsx:10: type CopilotContextValue,
+src\ai\copilotContext.tsx:11: type CopilotMessage,
+src\ai\copilotContext.tsx:12: type CopilotStatus,
+src\ai\copilotContext.tsx:13: } from './copilotContextCore';
+src\ai\copilotContext.tsx:16: * Session-scoped Copilot conversation state.
+src\ai\copilotContext.tsx:18: * Types and the context object live in `copilotContextCore.ts` (so this file
+src\ai\copilotContext.tsx:32: export function CopilotProvider({ children }: { children: ReactNode }) {
+src\ai\copilotContext.tsx:33: const [messages, setMessages] = useState<CopilotMessage[]>([]);
+src\ai\copilotContext.tsx:34: const [status, setStatus] = useState<CopilotStatus>('idle');
+src\ai\copilotContext.tsx:39: const messagesRef = useRef<CopilotMessage[]>([]);
+src\ai\copilotContext.tsx:48: const history: CopilotHistoryMessage[] = messagesRef.current
+src\ai\copilotContext.tsx:52: const reply = await askCopilot(prompt, history);
+src\ai\copilotContext.tsx:65: cause instanceof CopilotError
+src\ai\copilotContext.tsx:113: const value = useMemo<CopilotContextValue>(
+src\ai\copilotContext.tsx:126: return <CopilotContext.Provider value={value}>{children}</CopilotContext.Provider>;
+src\ai\copilotContextCore.ts:2: * The context/value contract for the Copilot conversation. Split into its own
+src\ai\copilotContextCore.ts:3: * file so `copilotContext.tsx` exports only components (react-refresh rule) —
+src\ai\copilotContextCore.ts:8: export type CopilotStatus = 'idle' | 'thinking' | 'error';
+src\ai\copilotContextCore.ts:10: export interface CopilotMessage {
+src\ai\copilotContextCore.ts:18: export interface CopilotContextValue {
+src\ai\copilotContextCore.ts:19: messages: CopilotMessage[];
+src\ai\copilotContextCore.ts:20: status: CopilotStatus;
+src\ai\copilotContextCore.ts:28: export const CopilotContext = createContext<CopilotContextValue | null>(null);
+src\ai\copilotService.ts:3: import type { CopilotHistoryMessage } from '../types/ai';
+src\ai\copilotService.ts:6: * Browser-side Copilot boundary.
+src\ai\copilotService.ts:10: * `finwise-copilot`, which derives authoritative financial context
+src\ai\copilotService.ts:18: export type { CopilotHistoryMessage };
+src\ai\copilotService.ts:20: export interface CopilotExchange {
+src\ai\copilotService.ts:26: export type CopilotFailureCode =
+src\ai\copilotService.ts:34: export class CopilotError extends Error {
+src\ai\copilotService.ts:35: readonly code: CopilotFailureCode;
+src\ai\copilotService.ts:37: constructor(code: CopilotFailureCode, message: string) {
+src\ai\copilotService.ts:39: this.name = 'CopilotError';
+src\ai\copilotService.ts:44: const FUNCTION_NAME = 'finwise-copilot';
+src\ai\copilotService.ts:46: interface CopilotResponsePayload {
+src\ai\copilotService.ts:55: const STATUS_TO_CODE: Record<number, CopilotFailureCode> = {
+src\ai\copilotService.ts:66: const CODE_TO_MESSAGE: Record<CopilotFailureCode, string> = {
+src\ai\copilotService.ts:67: unauthenticated: 'Please sign in again to use FinWise Copilot.',
+src\ai\copilotService.ts:69: rate_limited: 'FinWise Copilot is busy right now. Please try again in a moment.',
+src\ai\copilotService.ts:75: async function toCopilotError(cause: unknown): Promise<CopilotError> {
+src\ai\copilotService.ts:81: const payload = (await cause.context.json()) as CopilotResponsePayload | null;
+src\ai\copilotService.ts:101: return new CopilotError(code, detail ?? CODE_TO_MESSAGE[code]);
+src\ai\copilotService.ts:103: if (cause instanceof CopilotError) return cause;
+src\ai\copilotService.ts:104: return new CopilotError('server', CODE_TO_MESSAGE.server);
+src\ai\copilotService.ts:108: * Ask FinWise Copilot a question.
+src\ai\copilotService.ts:113: export async function askCopilot(
+src\ai\copilotService.ts:115: history: CopilotHistoryMessage[] = [],
+src\ai\copilotService.ts:116: ): Promise<CopilotExchange> {
+src\ai\copilotService.ts:121: throw new CopilotError(
+src\ai\copilotService.ts:123: 'FinWise Copilot is unavailable: the Supabase backend is not configured in this environment.',
+src\ai\copilotService.ts:126: let payload: CopilotResponsePayload | null;
+src\ai\copilotService.ts:132: payload = (data ?? null) as CopilotResponsePayload | null;
+src\ai\copilotService.ts:134: throw await toCopilotError(cause);
+src\ai\copilotService.ts:138: throw new CopilotError('server', CODE_TO_MESSAGE.server);
+src\ai\copilotService.ts:143: throw new CopilotError('server', 'The Copilot returned an empty response.');
+src\ai\useCopilot.ts:2: import { CopilotContext, type CopilotContextValue } from './copilotContextCore';
+src\ai\useCopilot.ts:5: * Accessor for the session-scoped Copilot conversation. Lives in its own file
+src\ai\useCopilot.ts:6: * (rather than beside `CopilotProvider`) so the provider file exports only
+src\ai\useCopilot.ts:9: export function useCopilot(): CopilotContextValue {
+src\ai\useCopilot.ts:10: const context = useContext(CopilotContext);
+src\ai\useCopilot.ts:12: throw new Error('useCopilot must be used within a CopilotProvider');
+src\pages\AIAssistantPage.tsx:4: import { useCopilot } from '../ai/useCopilot';
+src\pages\AIAssistantPage.tsx:10: * FinWise Copilot page.
+src\pages\AIAssistantPage.tsx:14: * the Copilot cannot mutate financial data in Phase 3C.
+src\pages\AIAssistantPage.tsx:27: useCopilot();
+src\pages\AIAssistantPage.tsx:46: const scroller = document.getElementById('copilot-messages');
+src\pages\AIAssistantPage.tsx:54: <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Copilot</p>
+src\pages\AIAssistantPage.tsx:55: <h1 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900">FinWise Copilot</h1>
+src\pages\AIAssistantPage.tsx:58: Copilot explains; it never changes your records.
+src\pages\AIAssistantPage.tsx:70: id="copilot-messages"
+src\pages\AIAssistantPage.tsx:78: title="Ask FinWise Copilot anything about your finances"
+src\pages\AIAssistantPage.tsx:79: description="Copilot answers using your actual FinWise data — never invented figures."
+src\pages\AIAssistantPage.tsx:117: FinWise Copilot is thinking…
+src\pages\AIAssistantPage.tsx:136: aria-label="Ask FinWise Copilot"
+src\pages\AIAssistantPage.tsx:147: Copilot is informational only and cannot create or change transactions,
+src\types\ai.ts:13: * A single prior conversational turn sent with a Copilot request.
+src\types\ai.ts:19: export interface CopilotHistoryMessage {
+src\types\ai.ts:25: * Request the browser sends to the secure FinWise Copilot Edge Function.
+src\types\ai.ts:34: export interface CopilotRequest {
+src\types\ai.ts:41: history?: CopilotHistoryMessage[];
+src\types\ai.ts:53: export interface CopilotResponse {
+src\main.tsx:4: import { CopilotProvider } from './ai/copilotContext';
+src\main.tsx:17: {/* Copilot state is session-scoped UI only: it talks exclusively to
+src\main.tsx:18: the finwise-copilot Edge Function and consumes no repository data,
+src\main.tsx:20: <CopilotProvider>
+src\main.tsx:22: </CopilotProvider>

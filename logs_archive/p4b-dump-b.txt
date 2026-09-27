@@ -1,0 +1,20 @@
+﻿Evidence: twin.relationships v4b.1 Â· window all Â· computed 2026-09-21 Â· from accounts 2 Â· budgets 1 Â· goals 1 Â· recurring_transactions 1 Â· categories 2 Â· transactions 7
+
+--- DIGITAL TWIN (empty data) innerText ---
+F
+
+FINWISE
+
+AI
+
+Overview
+Accounts
+Transactions
+Budget
+Goals
+Analytics
+Digital Twin
+Future Lab
+BumShankar AI ðŸ”±ðŸ•‰ï¸
+Settings
+

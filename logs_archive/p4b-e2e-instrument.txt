@@ -1,0 +1,20 @@
+﻿SNAPSHOT_KEY_BEFORE_FORCE:
+node : [eval]:1
+At line:1 char:147
++ ... rument.txt; node -e "const fs=require('fs');$sr=JSON.parse(fs.readFil ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([eval]:1:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+const fs=require('fs');=JSON.parse(fs.readFileSync('p4b-manual-test.cjs','utf8'));=.indexOf('// ---- T5 reload behavior ----');=.indexOf('// ---- T6 overview renders 
+seeded data ----');=.slice(,);fs.writeFileSync('p4b-t5-block.txt', );
+                       ^
+Expression expected
+
+SyntaxError: Unexpected token '='
+    at makeContextifyScript (node:internal/vm:194:14)
+    at compileScript (node:internal/process/execution:388:10)
+    at evalTypeScript (node:internal/process/execution:260:22)
+    at node:internal/main/eval_string:71:3
+
+Node.js v24.17.0

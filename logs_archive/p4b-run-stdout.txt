@@ -1,0 +1,36 @@
+PASS  T1 local-mode dev server on :5199 (this is the app under test) — started by harness
+PASS  T1 headless Edge launched with CDP — Edg/153.0.4234.48
+PASS  T1 app loads; local fallback mode active (no redirect to /login; Supabase env blanked) — pathname=/overview
+FAIL  T6 overview renders seeded data (net worth 2,70,500 derived from accounts) — value=null
+PASS  T6 /accounts renders via Sidebar with correct data — pathname=/accounts
+PASS  T6 /transactions renders via Sidebar with correct data — pathname=/transactions
+PASS  T6 /budget renders via Sidebar with correct data — pathname=/budget
+PASS  T6 /goals renders via Sidebar with correct data — pathname=/goals
+PASS  T6 /analytics renders via Sidebar with correct data — pathname=/analytics
+PASS  T2 /digital-twin reachable via Sidebar navigation
+PASS  T3 twin: State / Behaviour / Health / Relationships sections render
+FAIL  T3 twin: stat cards render
+FAIL  T3 twin net worth = 2,70,500 (derived from seeded accounts, not hardcoded) — value=Health score: 100/100 · buffer 12.7 months
+PASS  T3 behaviour derives groceries total 16,500 from transactions (12,000+4,500)
+PASS  T3 relationships link real rows (account/category/budget/goal/recurring)
+PASS  T4 every available section carries an Evidence line with rule version — evidence lines=4
+PASS  T4 evidence cites real source counts (accounts/transactions...)
+PASS  T3 twin memory: first snapshot auto-captured (guarded write)
+PASS  T3 snapshot storage row count = 1 — count=1
+PASS  T5 tour: twin wrote only its snapshot key; rendering never rewrites financial data — newKeys=[finwise.intelligence.snapshots.v1] changedCore=[]
+PASS  T5 refresh keeps /digital-twin working from persisted data
+FAIL  T5 after refresh: still exactly 1 snapshot (same day, no material change => no duplicate capture)
+FAIL  T5 after refresh: snapshot row count unchanged (no duplicates) — count=2
+PASS  T5 after refresh: transactions/accounts/budgets/goals byte-identical (no duplicates)
+PASS  T7 desktop (1440px): no horizontal overflow — {"sw":1425,"cw":1425}
+PASS  T4 empty data: insufficient-data reasons shown with named missing collections — Add an account so your twin can describe your financial state. (needs: accounts) | Your twin needs accounts or transactions before a state summary exists. (needs: accounts, transactions) | No expenses
+PASS  T4 empty data: no fabricated values (net worth shows no number) — value=null
+PASS  T4 empty data: 0 snapshots (no capture without real data)
+PASS  T7 mobile (390px): overview loads
+PASS  T2 MobileNav reaches /digital-twin — ok
+PASS  T7 mobile twin renders all sections
+PASS  T7 mobile (390px): no horizontal overflow / unusable sections — {"sw":390,"cw":390}
+PASS  no console errors/warnings during the whole session — none
+PASS  no uncaught page exceptions during the whole session — none
+PASS  no failed network requests during the whole session — none
+DONE 30/35 -> p4b-manual-report.txt

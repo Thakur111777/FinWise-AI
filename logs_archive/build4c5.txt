@@ -1,0 +1,11 @@
+dist/index.html                   0.46 kB ??? gzip:   0.29 kB
+dist/assets/index-BYTp17lD.css   20.79 kB ??? gzip:   5.07 kB
+dist/assets/index-Ch5TnuqL.js   713.86 kB ??? gzip: 196.53 kB
+
+[32m??? built in 1.47s[39m
+[33m[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+BUILD_EXIT=0

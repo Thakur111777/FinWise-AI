@@ -1,0 +1,13 @@
+=== tsc -p tsconfig.node.json --noEmit === exit=0
+=== listFilesOnly (filtered) ===
+C:/Users/Prashant Chadha/OneDrive/Desktop/College/FinWise-AI/vite.config.ts
+C:/Users/Prashant Chadha/OneDrive/Desktop/College/FinWise-AI/test-scope.ts
+listFilesOnly exit=0
+=== code --list-extensions === exit=0
+denoland.vscode-deno
+oracle.oracle-java
+ritwickdey.liveserver
+rodrigovallades.es7-react-js-snippets
+saoudrizwan.claude-dev
+yandeu.five-server
+
